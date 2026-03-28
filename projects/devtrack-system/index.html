@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تتبع المهام | DevTrack System</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dev-container">
+        <!-- Mobile Overlay -->
+        <div class="menu-overlay" id="menu-overlay" style="display: none;"></div>
+        
+        <!-- Vertical Sidebar -->
+        <aside class="dev-sidebar" id="side-nav">
+            <div class="dev-logo">
+                <i class="fas fa-terminal"></i>
+                <span>DevTrack</span>
+            </div>
+            <div class="dev-menu">
+                <a href="#" class="dev-item active" data-section="home"><i class="fas fa-layer-group"></i> المهام</a>
+                <a href="#" class="dev-item" data-section="bugs"><i class="fas fa-bug"></i> البلاغات</a>
+                <a href="#" class="dev-item" data-section="codes"><i class="fas fa-code"></i> الأكواد</a>
+                <a href="#" class="dev-item" data-section="team"><i class="fas fa-users"></i> الفريق</a>
+                <a href="#" class="dev-item" data-section="settings"><i class="fas fa-cogs"></i> الإعدادات</a>
+            </div>
+            <div class="dev-footer">
+                <a href="../../index.html" class="dev-exit"><i class="fas fa-arrow-right"></i> للملف الشخصي</a>
+            </div>
+        </aside>
+
+        <!-- Dynamic Main Section -->
+        <main class="dev-main">
+            <header class="top-header">
+                <!-- Mobile Trigger -->
+                <div class="mobile-menu-trigger" style="display: none; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <button id="mobile-menu-btn" style="background:transparent; border:none; font-size:1.8rem; color:var(--text-main); cursor:pointer;"><i class="fas fa-bars"></i></button>
+                    <h2 style="font-size: 1.2rem; margin:0; color: var(--primary); font-family: 'Outfit';">DevTrack</h2>
+                    <span></span>
+                </div>
+                
+                <div>
+                    <h1>لوحة مهام المشروع</h1>
+                    <p class="subtitle">قم بإدارة سير العمل ومتابعة الأخطاء البرمجية لفريقك.</p>
+                </div>
+                <p>المشروع النشط: <strong class="glow-white">نظام تتبع المهام (DevTrack)</strong> <span class="version-text">Version 3.0.4 - Production Ready</span></p>
+                <div class="header-widgets-container" style="display: flex; align-items: center; gap: 20px;">
+                    <div class="global-widgets" style="display:flex; align-items:center; gap:15px; position:relative;">
+                        <!-- Global Search -->
+                        <div style="position:relative; display:flex; align-items:center;">
+                            <i class="fas fa-search" style="position:absolute; right:12px; color:var(--text-muted); z-index:2;"></i>
+                            <input type="text" id="dt-search-input" placeholder="بحث في DevTrack..." style="padding: 8px 35px 8px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text-main); outline: none; transition: 0.3s; width: 200px; font-family: 'Cairo', sans-serif;">
+                            <div id="dt-search-results" style="display:none; position:absolute; top:110%; right:0; width:320px; background:rgba(15, 23, 42, 0.98); border:1px solid rgba(0, 210, 255, 0.2); border-radius:12px; box-shadow:0 15px 40px rgba(0,0,0,0.5); z-index:9999; max-height:280px; overflow-y:auto; margin-top:3px; backdrop-filter:blur(10px);"></div>
+                        </div>
+                        <!-- Notification Bell -->
+                        <div style="position:relative; cursor:pointer;" id="dt-bell-btn" title="الإشعارات">
+                            <i class="fas fa-bell" style="font-size: 1.4rem; color: var(--text-main);"></i>
+                            <span id="dt-bell-badge" style="position:absolute; top:-5px; right:-5px; background:var(--primary); color:black; border-radius:50%; width:18px; height:18px; font-size:10px; display:flex; align-items:center; justify-content:center; font-weight:bold;">2</span>
+                            <div id="dt-notif-dropdown" style="display:none; position:absolute; top:40px; left:0; width:300px; background:rgba(10, 18, 42, 0.97); border:1px solid rgba(241, 196, 15, 0.2); border-radius:15px; padding:15px; box-shadow:0 15px 40px rgba(0,0,0,0.6); z-index:9999; flex-direction:column; gap:10px; backdrop-filter:blur(10px);">
+                                <h4 style="margin-bottom:10px; color:var(--primary); border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">الإشعارات (DevTrack)</h4>
+                                <div id="dt-notif-list" style="display:flex; flex-direction:column; gap:8px; max-height:220px; overflow-y:auto;">
+                                    <div style="padding:10px; background:rgba(241,196,15,0.08); border-radius:8px; border-right:3px solid var(--primary);"><b style="font-size:0.85rem;"><i class="fas fa-bug" style="color:#ef4444;"></i> بلاغ BUG-202 لا يزال قيد المعالجة</b><p style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">فريق Frontend جار التحقيق منه.</p></div>
+                                    <div style="padding:10px; background:rgba(241,196,15,0.08); border-radius:8px; border-right:3px solid var(--primary);"><b style="font-size:0.85rem;"><i class="fas fa-code-branch" style="color:#3b82f6;"></i> PR جديد بانتظار المراجعة</b><p style="font-size:0.7rem; color:var(--text-muted); margin-top:4px;">RateLimiter.go جاهز للدمج.</p></div>
+                                </div>
+                                <button id="dt-mark-read" style="margin-top:5px; background: rgba(241,196,15,0.1); border: 1px solid rgba(241,196,15,0.3); color: var(--primary); padding: 8px; border-radius: 8px; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 0.85rem; width: 100%;">تحديد الكل كمقروء</button>
+                            </div>
+                        </div>
+                        <button class="dev-btn btn-secondary" id="app-switcher-btn" title="تبديل المشاريع" style="padding: 10px; border-radius: 12px; height: 45px; width: 45px; display: flex; align-items: center; justify-content: center; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); cursor:pointer;"><i class="fas fa-braille" style="margin:0; font-size:1.2rem; color:var(--primary);"></i></button>
+                        <div class="dropdown-menu app-grid" id="apps-dropdown" style="display:none; position:absolute; top:55px; left:0; width:280px; background:rgba(15, 23, 42, 0.95); border:1px solid rgba(255,255,255,0.1); border-radius:15px; padding:15px; box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:9999; grid-template-columns:1fr 1fr; gap:10px; backdrop-filter:blur(10px);">
+                            <a href="../../index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-main); transition:backgroundColor 0.3s;"><i class="fas fa-user-circle" style="font-size:1.5rem; color:#8b5cf6; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">الملف الشخصي</span></a>
+                            <a href="../education-portal/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-main); transition:backgroundColor 0.3s;"><i class="fas fa-graduation-cap" style="font-size:1.5rem; color:#0ea5e9; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">بوابة التعليم</span></a>
+                            <a href="../b2b-ecommerce/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-main); transition:backgroundColor 0.3s;"><i class="fas fa-store" style="font-size:1.5rem; color:#10b981; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">B2B التاجر</span></a>
+                            <a href="../devtrack-system/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-main); background:rgba(0, 210, 255, 0.1); transition:backgroundColor 0.3s;"><i class="fas fa-terminal" style="font-size:1.5rem; color:var(--primary); display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">DevTrack</span></a>
+                        </div>
+                    </div>
+                    <div class="dev-user">
+                        <div class="dev-status">
+                            <span class="status-indicator"></span>
+                            <span style="font-size: 0.7rem; color: var(--primary);">متصل بجلسة العمل</span>
+                        </div>
+                        <div class="dev-pfp">
+                            <img src="../../images/me.jpg" alt="Dev" onerror="this.src='https://ui-avatars.com/api/?name=AK&background=f1c40f&color=000'">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div id="section-home" class="content-section active">
+                <!-- Progress Summary -->
+                <div class="dev-progress-card">
+                    <div class="prog-info">
+                        <h3><i class="fas fa-chart-line"></i> مؤشر الإنجاز والإنتاجية الكلي</h3>
+                        <span id="total-progress">0%</span>
+                    </div>
+                    <div class="prog-bar-container">
+                        <div class="prog-bar-fill" id="progress-fill" style="width: 0%;">
+                            <div class="shine"></div>
+                        </div>
+                    </div>
+                    <div class="prog-details">
+                        <span>إجمالي المهام المنجزة: <b id="done-count">0</b></span>
+                        <span>معدل الكفاءة: <b>98.2%</b></span>
+                    </div>
+                </div>
+
+                <!-- Kanban Board -->
+                <div class="kanban-board">
+                    <!-- Column: To Do -->
+                    <div class="kanban-col" id="col-todo">
+                        <div class="col-title"><i class="fas fa-layer-group"></i> بانتظار المراجعة <span class="counter">0</span></div>
+                        <div class="cards-area">
+                            <div class="kanban-card" data-task-id="1">
+                                <div class="card-header-row">
+                                    <span class="card-tag bug">BUG</span>
+                                    <span class="card-serial">#DT-001</span>
+                                </div>
+                                <h3>إصلاح ميكانيكا التمرير (Scroll)</h3>
+                                <p>حل مشكلة التوقف المفاجئ عند التمرير السريع في الهواتف.</p>
+                                <div class="card-footer">
+                                    <span class="priority high"><i class="fas fa-circle"></i> High</span>
+                                    <span class="date"><i class="fas fa-calendar-day"></i> اليوم</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column: In Progress -->
+                    <div class="kanban-col" id="col-progress">
+                        <div class="col-title"><i class="fas fa-bolt"></i> قيد البرمجة النشطة <span class="counter">0</span></div>
+                        <div class="cards-area">
+                            <div class="kanban-card" data-task-id="2">
+                                <div class="card-header-row">
+                                    <span class="card-tag feature">FEATURE</span>
+                                    <span class="card-serial">#DT-002</span>
+                                </div>
+                                <h3>تفعيل نظام الإشعارات اللحظية</h3>
+                                <p>ربط Firebase لإرسال تنبيهات للمستخدمين عند تحديث المهام.</p>
+                                <div class="card-footer">
+                                    <span class="priority medium"><i class="fas fa-circle"></i> Mid</span>
+                                    <span class="date"><i class="fas fa-calendar-day"></i> 25 مارس</span>
+                                </div>
+                            </div>
+                            <div class="kanban-card" data-task-id="3">
+                                <div class="card-header-row">
+                                    <span class="card-tag research">RESEARCH</span>
+                                    <span class="card-serial">#DT-003</span>
+                                </div>
+                                <h3>تحسين سرعة الاستجابة</h3>
+                                <p>تقليل زمن تحميل الصور وملفات CSS بنسبة 40%.</p>
+                                <div class="card-footer">
+                                    <span class="priority high"><i class="fas fa-circle"></i> High</span>
+                                    <span class="date"><i class="fas fa-calendar-day"></i> 26 مارس</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column: Done -->
+                    <div class="kanban-col" id="col-done">
+                        <div class="col-title"><i class="fas fa-check-double"></i> تم الاعتماد والإطلاق <span class="counter">0</span></div>
+                        <div class="cards-area">
+                            <div class="kanban-card done" data-task-id="4">
+                                <div class="card-header-row">
+                                    <span class="card-tag design">DESIGN</span>
+                                    <span class="card-serial">#DT-004</span>
+                                </div>
+                                <h3>تحديث واجهة الـ Glassmorphism</h3>
+                                <p>تحسين تأثير الشفافية والظلال في جميع عناصر النظام.</p>
+                                <div class="card-footer">
+                                    <span class="priority low"><i class="fas fa-circle"></i> Low</span>
+                                    <span class="date"><i class="fas fa-check"></i> مكتمل</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page: Bugs (Requirement 4) -->
+            <div id="section-bugs" class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-bug"></i> سجل البلاغات والأخطاء</h3>
+                    <p>قائمة تقنية دقيقة بجميع الثغرات والأعطال التي تم رصدها.</p>
+                </div>
+                <div class="dev-table-container">
+                    <table class="dev-table">
+                        <thead>
+                            <tr>
+                                <th>المعرف</th>
+                                <th>الموديول التقني</th>
+                                <th>نوع البلاغ</th>
+                                <th>الوصف</th>
+                                <th>الحالة</th>
+                                <th>الأولوية</th>
+                                <th>الفريق المسؤول</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bugs-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Page: Codes (Requirement 5) -->
+            <div id="section-codes" class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-terminal"></i> مستودع الأكواد (Code Repository)</h3>
+                    <p>أرشيف متكامل للأكواد المنجزة مرتبة حسب الفريق والوظيفة.</p>
+                </div>
+                <div class="dev-table-container">
+                    <table class="dev-table">
+                        <thead>
+                            <tr>
+                                <th>اسم الملف / الموديول</th>
+                                <th>الفرع (Branch)</th>
+                                <th>الوظيفة والوصف</th>
+                                <th>التقنية</th>
+                                <th>حالة الكود</th>
+                                <th>تحديث وإنجاز</th>
+                                <th>الفريق</th>
+                            </tr>
+                        </thead>
+                        <tbody id="codes-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Page: Team (Requirement 6) -->
+            <div id="section-team" class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-users"></i> فريق العمل</h3>
+                    <p>إدارة الكوادر والمجموعات التقنية المشاركة في المشروع.</p>
+                </div>
+                <div class="team-grid" id="team-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Page: Settings (Requirement 7) -->
+            <div id="section-settings" class="content-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-sliders-h"></i> إعدادات مساحة العمل (Workspace)</h3>
+                    <p>إدارة التكوينات وتكاملات النظام (Integrations & Configurations).</p>
+                </div>
+                <div class="settings-grid">
+                    <div class="settings-box">
+                        <h4 style="margin-bottom:20px; color:var(--primary);"><i class="fas fa-project-diagram"></i> إعدادات المشروع الأساسية</h4>
+                        <div class="settings-group">
+                            <label>اسم بيئة العمل (Repository Name)</label>
+                            <input type="text" value="devtrack-system-core" class="dev-input" style="font-family:'JetBrains Mono';">
+                        </div>
+                        <div class="settings-group">
+                            <label>الفرع الافتراضي (Default Branch)</label>
+                            <select class="dev-input" style="font-family:'JetBrains Mono';">
+                                <option>main</option>
+                                <option>develop</option>
+                                <option>production</option>
+                            </select>
+                        </div>
+                        <div class="settings-group">
+                            <label>خصوصية المشروع (Visibility)</label>
+                            <div style="display:flex; gap:10px;">
+                                <button class="dev-btn btn-primary" style="padding: 8px 15px;"><i class="fas fa-lock"></i> Private</button>
+                                <button class="dev-btn btn-secondary" style="padding: 8px 15px;"><i class="fas fa-globe"></i> Public</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-box">
+                        <h4 style="margin-bottom:20px; color:var(--primary);"><i class="fas fa-plug"></i> التكامل والتطوير الآلي (CI/CD)</h4>
+                        <div class="settings-group">
+                            <label>مفتاح الربط (API Token)</label>
+                            <div style="position:relative;">
+                                <input type="password" value="dt_pk_9a8s7d6f5g4h3j2k" class="dev-input" readonly style="font-family:'JetBrains Mono'; padding-right:40px;">
+                                <i class="fas fa-copy" style="position:absolute; right:15px; top:50%; transform:translateY(-50%); cursor:pointer; color:var(--text-muted);" title="نسخ المفتاح"></i>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <label>Webhooks URL</label>
+                            <input type="text" placeholder="https://api.yourdomain.com/webhook" class="dev-input" style="font-family:'JetBrains Mono'; text-align:left; direction:ltr;" value="https://ci.devtrack.internal/hook">
+                        </div>
+                        <div class="settings-group" style="display:flex; justify-content:space-between; align-items:center;">
+                            <label style="margin:0;">تفعيل الاختبار التلقائي للوحدات (Auto-Testing)</label>
+                            <input type="checkbox" checked class="dev-switch">
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; text-align: left;">
+                    <button class="save-btn dev-btn btn-primary" style="padding: 12px 30px; font-size: 1.1rem;"><i class="fas fa-save"></i> حفظ جميع التعديلات</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Task Details Modal (Requirement 2) -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body">
+                <!-- Data injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Encrypted Chat Interface -->
+    <div id="chat-interface" class="chat-interface">
+        <div class="chat-header">
+            <div class="chat-user-info">
+                <img src="" alt="User" id="chat-pfp">
+                <div>
+                    <h4 id="chat-name">Name</h4>
+                    <span id="chat-status"><i class="fas fa-user-shield" style="color:var(--primary); font-size:10px;"></i> P2P Encrypted</span>
+                </div>
+            </div>
+            <button class="close-chat" id="close-chat-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages inserted here -->
+        </div>
+        <div class="chat-quick-replies" id="chat-quick-replies" style="display:none;">
+            <!-- Bot contextual options will appear here -->
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="اكتب رسالة أو اختر مما سبق..." class="dev-input" style="border-radius: 20px; padding: 10px 15px; border-color:transparent;">
+            <button id="send-btn" class="dev-btn btn-primary" style="padding: 10px; border-radius: 50%; min-width: 45px; height: 45px; display: flex; justify-content: center; align-items: center;"><i class="fas fa-paper-plane" style="margin:0;"></i></button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

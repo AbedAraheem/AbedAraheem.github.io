@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة التعليم الذكية | SmartEdu Portal</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Mobile Overlay -->
+        <div class="menu-overlay" id="menu-overlay" style="display: none;"></div>
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="side-nav">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>SmartEdu</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-view="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span>لوحة التحكم</span>
+                </a>
+                <a href="#" class="nav-item" data-view="courses">
+                    <i class="fas fa-book-open"></i>
+                    <span>المواد الدراسية</span>
+                </a>
+                <a href="#" class="nav-item" data-view="grades">
+                    <i class="fas fa-chart-line"></i>
+                    <span>نتائج الاختبارات</span>
+                </a>
+                <a href="#" class="nav-item" data-view="schedule">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>الجدول الدراسي</span>
+                </a>
+                <a href="#" class="nav-item" data-view="assignments">
+                    <i class="fas fa-list-check"></i>
+                    <span>المهام والمشاريع</span>
+                </a>
+                <a href="#" class="nav-item" data-view="profile">
+                    <i class="fas fa-user-circle"></i>
+                    <span>الملف الشخصي</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../../index.html" class="back-link">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>العودة للملف الشخصي</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-nav">
+                <!-- Mobile Trigger -->
+                <div class="mobile-menu-trigger" style="display: none; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <button id="mobile-menu-btn" style="background:transparent; border:none; font-size:1.8rem; color:var(--text); cursor:pointer;"><i class="fas fa-bars"></i></button>
+                    <h2 style="font-size: 1.2rem; margin:0; color: #00d2ff; font-weight: 800;">SmartEdu</h2>
+                    <span></span>
+                </div>
+                
+                <div class="search-container" style="position: relative;">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="global-search" placeholder="ابحث عن مواد، مهام..." autocomplete="off">
+                    </div>
+                    <div id="search-results" class="search-results-dropdown glass" style="display: none;"></div>
+                </div>
+                <div class="user-meta">
+                    <div class="notifications-container" style="position: relative;">
+                        <div class="notifications" id="notifications-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge" id="notifications-badge">0</span>
+                        </div>
+                        <div id="notifications-dropdown" class="notifications-dropdown glass" style="display: none;">
+                            <div class="dropdown-header"><h3>الإشعارات</h3><button id="mark-all-read" style="background:none;border:none;color:var(--primary);cursor:pointer;">تحديد كمقروء</button></div>
+                            <div class="notifications-list" id="notifications-list"></div>
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">عبد الرحيم الهباش</div>
+                        <div class="user-role">طالب هندسة برمجيات</div>
+                    </div>
+                    <div class="user-avatar">
+                        <img src="../../images/me.jpg" alt="User Avatar" onerror="this.src='https://ui-avatars.com/api/?name=AK&background=00d2ff&color=fff'">
+                    </div>
+                    <!-- App Switcher -->
+                    <div style="position:relative;">
+                        <button id="edu-app-switcher-btn" title="تبديل المشاريع" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:12px; width:42px; height:42px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.3s;"><i class="fas fa-braille" style="font-size:1.2rem; color:#00d2ff;"></i></button>
+                        <div id="edu-apps-dropdown" style="display:none; position:absolute; top:50px; left:0; width:260px; background:rgba(10, 18, 40, 0.97); border:1px solid rgba(0, 210, 255, 0.2); border-radius:15px; padding:15px; box-shadow:0 15px 40px rgba(0,0,0,0.6); z-index:9999; grid-template-columns:1fr 1fr; gap:10px; backdrop-filter:blur(15px);">
+                            <a href="../../index.html" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:white; display:block; transition:0.3s;"><i class="fas fa-user-circle" style="font-size:1.5rem; color:#8b5cf6; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem; font-family:'Cairo',sans-serif;">الملف الشخصي</span></a>
+                            <a href="../education-portal/index.html" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:white; background:rgba(0, 210, 255, 0.1); display:block; transition:0.3s;"><i class="fas fa-graduation-cap" style="font-size:1.5rem; color:#00d2ff; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem; font-family:'Cairo',sans-serif;">بوابة التعليم</span></a>
+                            <a href="../b2b-ecommerce/index.html" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:white; display:block; transition:0.3s;"><i class="fas fa-store" style="font-size:1.5rem; color:#10b981; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem; font-family:'Cairo',sans-serif;">B2B التاجر</span></a>
+                            <a href="../devtrack-system/index.html" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:white; display:block; transition:0.3s;"><i class="fas fa-terminal" style="font-size:1.5rem; color:#f59e0b; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem; font-family:'Cairo',sans-serif;">DevTrack</span></a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section id="content-view" class="content-view">
+                <!-- Dashboard Content (Default) -->
+                <div class="dashboard-grid">
+                    <div class="welcome-banner glass">
+                        <h1>مرحباً بعودتك، يا عبد الرحيم! 👋</h1>
+                        <p>لديك اليوم 3 مهام جديدة وموعد اختبار في مادة هندسة البرمجيات.</p>
+                        <button class="btn-action">عرض الجدول اليومي</button>
+                    </div>
+
+                    <div class="stats-cards">
+                        <div class="stat-card glass blur-cyan">
+                            <i class="fas fa-book"></i>
+                            <div class="stat-info">
+                                <h3>8</h3>
+                                <p>المواد الحالية</p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass blur-purple">
+                            <i class="fas fa-percentage"></i>
+                            <div class="stat-info">
+                                <h3>94%</h3>
+                                <p>المعدل التراكمي</p>
+                            </div>
+                        </div>
+                        <div class="stat-card glass blur-orange">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="stat-info">
+                                <h3>12</h3>
+                                <p>مهام مكتملة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="upcoming-tasks glass">
+                        <div class="card-header">
+                            <h2>المهام القادمة</h2>
+                            <a href="#">عرض الكل</a>
+                        </div>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <div class="task-check"><i class="far fa-circle"></i></div>
+                                <div class="task-details">
+                                    <h4>مشروع تقنيات الويب</h4>
+                                    <span>غداً - 10:00 ص</span>
+                                </div>
+                                <div class="priority high">عالية</div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-check"><i class="far fa-circle"></i></div>
+                                <div class="task-details">
+                                    <h4>تحليل نظم المعلومات</h4>
+                                    <span>الخميس - 12:00 م</span>
+                                </div>
+                                <div class="priority medium">متوسطة</div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-check"><i class="far fa-circle"></i></div>
+                                <div class="task-details">
+                                    <h4>خوارزميات متقدمة</h4>
+                                    <span>28 مارس 2026</span>
+                                </div>
+                                <div class="priority low">عادية</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="courses-preview glass">
+                        <div class="card-header">
+                            <h2>أحدث المواد</h2>
+                        </div>
+                        <div class="course-list-mini">
+                            <div class="course-item-mini">
+                                <div class="course-icon"><i class="fab fa-react"></i></div>
+                                <div class="course-text">
+                                    <h4>React JS Framework</h4>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 75%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="course-item-mini">
+                                <div class="course-icon"><i class="fab fa-python"></i></div>
+                                <div class="course-text">
+                                    <h4>Python for Data Science</h4>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 40%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Task Modal -->
+    <div id="task-modal" class="modal-overlay">
+        <div class="modal-content glass">
+            <button class="close-modal" id="close-task-modal">&times;</button>
+            <div class="modal-header"><h2><i class="fas fa-plus-circle"></i> إضافة مهمة جديدة</h2></div>
+            <div class="modal-body">
+                <form id="add-task-form">
+                    <div class="form-group">
+                        <label>عنوان المهمة</label>
+                        <input type="text" id="task-title" required placeholder="مثال: تحليل متطلبات النظام">
+                    </div>
+                    <div class="form-group">
+                        <label>المادة</label>
+                        <select id="task-course" required>
+                            <option value="" disabled selected>اختر المادة</option>
+                            <option value="تطوير تطبيقات الويب الحديثة">تطوير تطبيقات الويب الحديثة</option>
+                            <option value="خوارزميات وهياكل بيانات">خوارزميات وهياكل بيانات</option>
+                            <option value="هندسة البرمجيات المتقدمة">هندسة البرمجيات المتقدمة</option>
+                            <option value="تحليل وتصميم النظم">تحليل وتصميم النظم</option>
+                            <option value="قواعد البيانات العلائقية">قواعد البيانات العلائقية</option>
+                            <option value="أمن المعلومات والشبكات">أمن المعلومات والشبكات</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>موعد التسليم</label>
+                            <input type="datetime-local" id="task-deadline" required>
+                        </div>
+                        <div class="form-group">
+                            <label>الأولوية</label>
+                            <select id="task-priority" required>
+                                <option value="high">عالية</option>
+                                <option value="medium" selected>متوسطة</option>
+                                <option value="low">عادية</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-action w-100" style="width: 100%; margin-top: 20px;">حفظ المهمة</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

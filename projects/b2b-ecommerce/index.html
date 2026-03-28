@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التاجر | لوحة التحكم</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Mobile Overlay -->
+        <div class="menu-overlay" id="menu-overlay" style="display: none;"></div>
+        
+        <!-- Vertical Navbar -->
+        <nav class="side-nav" id="side-nav">
+            <div class="brand">
+                <img src="images/logo.png" alt="منصة التاجر" class="brand-logo">
+                <span class="brand-name">منصة التاجر</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-content="dashboard"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="#" class="nav-link" data-content="inventory"><i class="fas fa-boxes"></i> المخزون</a>
+                <a href="#" class="nav-link" data-content="orders"><i class="fas fa-shopping-cart"></i> الطلبات</a>
+                <a href="#" class="nav-link" data-content="customers"><i class="fas fa-users"></i> العملاء</a>
+                <a href="#" class="nav-link" data-content="reports"><i class="fas fa-chart-pie"></i> التقارير</a>
+            </div>
+            <div class="nav-bottom">
+                <a href="../../index.html" class="nav-link exit"><i class="fas fa-sign-out-alt"></i> خروج للملف الشخصي</a>
+            </div>
+        </nav>
+
+        <!-- Main View Area -->
+        <main class="page-content">
+            <header class="page-header">
+                <!-- Mobile Trigger -->
+                <div class="mobile-menu-trigger" style="display: none; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <button id="mobile-menu-btn" style="background:transparent; border:none; font-size:1.8rem; color:var(--text-dark); cursor:pointer;"><i class="fas fa-bars"></i></button>
+                    <h2 style="font-size: 1.2rem; margin:0; color: var(--primary);">B2B Portal</h2>
+                    <span></span>
+                </div>
+                
+                <div class="welcome-text">
+                    <h1 id="page-header-title">لوحة التاجر المركزية</h1>
+                    <p id="view-subtitle">أهلاً عبد الرحيم، إليك نظرة على أداء مبيعاتك لليوم.</p>
+                </div>
+                <div class="header-actions" style="display:flex; align-items:center; gap:20px;">
+                    <div class="global-widgets" style="display:flex; align-items:center; gap:15px; position:relative;">
+                        <div style="position:relative; display:flex; align-items:center;">
+                            <i class="fas fa-search" style="position:absolute; right:10px; color:var(--text-light); z-index:2;"></i>
+                            <input type="text" id="global-search-input" placeholder="بحث شامل..." style="padding: 8px 30px 8px 15px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg-light); color: var(--text-dark); outline: none; transition: 0.3s; width: 220px;">
+                        </div>
+                        <div class="notifications-bell" style="position:relative; cursor:pointer;" title="الإشعارات" id="b2b-bell-btn">
+                            <i class="fas fa-bell" style="font-size: 1.4rem; color: var(--text-dark); transition: color 0.3s;"></i>
+                            <span class="badge" id="b2b-bell-badge" style="position:absolute; top:-5px; right:-5px; background:var(--primary); color:white; border-radius:50%; width:18px; height:18px; font-size:10px; display:flex; align-items:center; justify-content:center; font-weight:bold;">1</span>
+                            <!-- Dropdown -->
+                            <div class="dropdown-menu" id="b2b-notif-dropdown" style="display:none; position:absolute; top:40px; right:-10px; width:300px; background:var(--bg-light); border:1px solid var(--border); border-radius:15px; padding:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); z-index:100; flex-direction:column; gap:10px;">
+                                <h4 style="margin-bottom:10px; color:var(--primary); border-bottom:1px solid var(--border); padding-bottom:10px;">الإشعارات (نظام B2B)</h4>
+                                <div id="b2b-notif-list" style="display:flex; flex-direction:column; gap:10px; max-height:250px; overflow-y:auto; padding-right:5px;">
+                                    <div class="notif-item" style="padding:10px; background:rgba(16, 185, 129, 0.1); border-radius:8px; border-right:3px solid var(--primary); cursor:pointer;">
+                                        <b style="font-size:0.9rem; color:var(--text-dark);"><i class="fas fa-info-circle" style="color:var(--primary);"></i> ترحيب في نظام التاجر</b>
+                                        <p style="font-size:0.75rem; color:var(--text-light); margin-top:5px;">لوحة تحكم B2B تعمل بكفاءة عالية.</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary w-full" id="b2b-mark-read" style="margin-top:5px;">تحديد الكل كمقروء</button>
+                            </div>
+                        </div>
+
+                        <button style="background:transparent; border:none; cursor:pointer;" id="app-switcher-btn" title="تبديل المشاريع"><i class="fas fa-braille" style="font-size:1.5rem; color:var(--primary);"></i></button>
+                        <div class="dropdown-menu app-grid" id="apps-dropdown" style="display:none; position:absolute; top:40px; right:0; width:280px; background:var(--bg-light); border:1px solid var(--border); border-radius:15px; padding:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); z-index:100; grid-template-columns:1fr 1fr; gap:10px;">
+                            <a href="../../index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-dark); transition:backgroundColor 0.3s;"><i class="fas fa-user-circle" style="font-size:1.5rem; color:#8b5cf6; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">الملف الشخصي</span></a>
+                            <a href="../education-portal/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-dark); transition:backgroundColor 0.3s;"><i class="fas fa-graduation-cap" style="font-size:1.5rem; color:#0ea5e9; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">بوابة التعليم</span></a>
+                            <a href="../b2b-ecommerce/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-dark); background:rgba(16, 185, 129, 0.1); transition:backgroundColor 0.3s;"><i class="fas fa-store" style="font-size:1.5rem; color:#10b981; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">B2B التاجر</span></a>
+                            <a href="../devtrack-system/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-dark); transition:backgroundColor 0.3s;"><i class="fas fa-terminal" style="font-size:1.5rem; color:#f59e0b; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">DevTrack</span></a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle-btn" id="theme-btn" title="تغيير المظهر"><i class="fas fa-moon"></i></button>
+                    <button class="btn btn-primary" id="top-btn"><i class="fas fa-plus"></i> إضافة منتج جديد</button>
+                    <div class="user-profile">
+                        <img src="../../images/me.jpg" alt="Admin" onerror="this.src='https://ui-avatars.com/api/?name=AK&background=10b981&color=fff'">
+                    </div>
+                </div>
+            </header>
+
+            <div id="dynamic-view">
+                <!-- Dashboard Stats (Default) -->
+                <div class="stats-overview">
+                    <div class="stat-box">
+                        <div class="stat-header">
+                            <span class="stat-label">إجمالي المبيعات</span>
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-value" id="dash-total-sales">$124,560.80</div>
+                        <div class="stat-change up">+12.5% منذ الشهر الماضي</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-header">
+                            <span class="stat-label">عدد الطلبات</span>
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-value" id="dash-total-orders">1,245</div>
+                        <div class="stat-change up">+5.2% منذ أمس</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-header">
+                            <span class="stat-label">صافي الربح</span>
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-value" id="dash-net-profit">$45,210.00</div>
+                        <div class="stat-change up">+8.1% نمو سنوي</div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Details -->
+                <div class="metrics-charts paper" style="margin-bottom: 25px;">
+                    <div class="card-title">تحليل المبيعات (أسبوعي)</div>
+                    <div style="position: relative; height: 300px; width: 100%;">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="details-grid">
+                    <div class="orders-table-container paper">
+                        <div class="card-title">آخر الطلبات</div>
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم الطلب</th>
+                                    <th>العميل</th>
+                                    <th>المنتج</th>
+                                    <th>السعر</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#ORD-7892</td>
+                                    <td>شركة التقنية الحديثة</td>
+                                    <td>لابتوبات Dell XPS</td>
+                                    <td>$4,500</td>
+                                    <td><span class="status-badge shipped">تم الشحن</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#ORD-7893</td>
+                                    <td>مؤسسة الرواد</td>
+                                    <td>شاشات سامسونج 4K</td>
+                                    <td>$2,100</td>
+                                    <td><span class="status-badge pending">معلق</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="popular-products paper">
+                        <div class="card-title">الأكثر مبيعاً</div>
+                        <div class="product-mini-list">
+                            <div class="product-mini-item">
+                                <div class="p-img"><i class="fas fa-laptop"></i></div>
+                                <div class="p-info"><h3>MacBook Pro</h3><span>234 وحدة</span></div>
+                                <div class="p-price">$2,499</div>
+                            </div>
+                            <div class="product-mini-item">
+                                <div class="p-img"><i class="fas fa-mobile-alt"></i></div>
+                                <div class="p-info"><h3>iPhone 15</h3><span>182 وحدة</span></div>
+                                <div class="p-price">$1,199</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Modal for Adding New Product -->
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>إضافة وحدة جديدة للمخزون</h2>
+                <button id="close-modal" class="close-btn">&times;</button>
+            </div>
+            <form id="add-product-form" class="modal-body">
+                <div class="input-group">
+                    <label>اسم المنتج</label>
+                    <input type="text" id="p-name" placeholder="مثلاً: MacBook Pro M3" required>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>الفئة</label>
+                        <select id="p-category">
+                            <option value="Electronics">أجهزة إلكترونية</option>
+                            <option value="Accessories">إكسسوارات</option>
+                            <option value="Software">برمجيات</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>الكمية</label>
+                        <input type="number" id="p-qty" placeholder="0" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>سعر الوحدة ($)</label>
+                    <input type="number" id="p-price" placeholder="0.00" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-modal">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ في المخزن</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Adding New Customer -->
+    <div id="customer-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>إضافة عميل جديد للنظام</h2>
+                <button id="close-customer-modal" class="close-btn">&times;</button>
+            </div>
+            <form id="add-customer-form" class="modal-body">
+                <div class="input-group">
+                    <label>الاسم بالكامل</label>
+                    <input type="text" id="c-name" placeholder="مثلاً: م. خالد أحمد" required>
+                </div>
+                <div class="input-group">
+                    <label>المسمى الوظيفي</label>
+                    <input type="text" id="c-job" placeholder="مثلاً: مدير المشتريات" required>
+                </div>
+                <div class="input-group">
+                    <label>جهة العمل / الشركة</label>
+                    <input type="text" id="c-company" placeholder="مثلاً: شركة التوريدات الكبرى" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-customer-modal">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">إضافة العميل وتوثيقه</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast-hidden">تمت إضافة المنتج بنجاح إلى قاعدة البيانات!</div>
+
+    <!-- Enhanced Customer 360 View Modal -->
+    <div id="customer-360-modal" class="modal-overlay">
+        <div class="modal-card" style="width: 600px;">
+            <div class="modal-header">
+                <h2>الملف الشامل للعميل (360 View)</h2>
+                <button id="close-360-modal" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body" id="customer-360-content">
+                <!-- Data injected via JS -->
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid var(--border); padding-top: 15px;">
+                <button class="btn btn-secondary" id="close-360-btn">إغلاق الملف</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Libraries for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

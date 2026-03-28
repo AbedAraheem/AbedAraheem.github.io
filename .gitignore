@@ -1,0 +1,7 @@
+# Files to ignore when deploying to GitHub
+node_modules/
+.env
+*.log
+Thumbs.db
+.DS_Store
+desktop.ini
