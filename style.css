@@ -1065,3 +1065,115 @@ footer {
         height: 45px;
     }
 }
+
+/* Directional Flow & i18n Fixes */
+.flip-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* English Version - High Fidelity Overrides */
+body.lang-en {
+    font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif !important;
+}
+
+body.lang-en .about-text p,
+body.lang-en .hero-content p,
+body.lang-en .project-info p,
+body.lang-en .form-group label,
+body.lang-en .section-title p {
+    text-align: left;
+}
+
+body.lang-en .btn i {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+body.lang-en .about-stats {
+    flex-direction: row-reverse; /* Keeping stats numbers visual flow */
+}
+
+body.lang-en .stat-card h3 {
+    font-family: 'Outfit', sans-serif;
+}
+
+body.lang-en .hero-btns {
+    justify-content: flex-start;
+}
+
+body.lang-en .navbar nav {
+    flex-direction: row; /* Ensure standard LTR flow */
+}
+
+body.lang-en .nav-links {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+body.lang-en .footer-social {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* Mobile Specific Fixes for English */
+@media (max-width: 768px) {
+    body.lang-en .nav-links {
+        left: 0;
+        right: 0;
+        text-align: left;
+    }
+    
+    body.lang-en .nav-links li {
+        padding-left: 30px;
+    }
+    
+    body.lang-en .dropdown-menu {
+        right: auto;
+        left: -20px;
+    }
+
+    body.lang-en .footer-content p {
+        text-align: center;
+    }
+}
+
+
+body.lang-en .btn i {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+body.lang-en .about-stats {
+    flex-direction: row-reverse;
+}
+
+body.lang-en .stat-card h3 {
+    font-family: 'Outfit', sans-serif;
+}
+
+body.lang-en .hero-btns {
+    justify-content: flex-start;
+}
+
+body.lang-en .scroll-indicator {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+body.lang-en .footer-content {
+    flex-direction: row-reverse;
+}
+
+body.lang-en .lang-toggle {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+@media (max-width: 768px) {
+    body.lang-en .nav-links {
+        right: 0;
+        left: 0;
+        text-align: left;
+    }
+}
