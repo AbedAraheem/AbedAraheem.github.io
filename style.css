@@ -1065,3 +1065,54 @@ footer {
         height: 45px;
     }
 }
+
+/* English Language Overrides (LTR Support) */
+body.lang-en {
+    font-family: 'Inter', 'Outfit', sans-serif !important;
+}
+
+body.lang-en .about-text p,
+body.lang-en .hero-content p,
+body.lang-en .project-info p,
+body.lang-en .form-group label {
+    text-align: left;
+}
+
+body.lang-en .btn i {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+body.lang-en .about-stats {
+    flex-direction: row-reverse;
+}
+
+body.lang-en .stat-card h3 {
+    font-family: 'Outfit', sans-serif;
+}
+
+body.lang-en .hero-btns {
+    justify-content: flex-start;
+}
+
+body.lang-en .scroll-indicator {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+body.lang-en .footer-content {
+    flex-direction: row-reverse;
+}
+
+body.lang-en .lang-toggle {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+@media (max-width: 768px) {
+    body.lang-en .nav-links {
+        right: 0;
+        left: 0;
+        text-align: left;
+    }
+}
