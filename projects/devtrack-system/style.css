@@ -491,6 +491,17 @@ body {
     .mobile-menu-trigger { display: flex !important; margin-bottom: 20px; }
     #mobile-menu-btn i { color: var(--text-main); }
     
+    .mobile-back-home {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        color: var(--primary);
+        font-size: 1.5rem;
+        transition: 0.3s;
+    }
+    
     /* Overlay for Sidebar Drawer */
     .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9998; opacity: 0; transition: opacity 0.3s; }
     .menu-overlay.active { display: block !important; opacity: 1; }

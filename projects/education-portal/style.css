@@ -326,6 +326,19 @@ body {
 
 @media (max-width: 768px) {
     .sidebar { display: none; }
+    .mobile-menu-trigger { display: flex !important; }
+    
+    .mobile-back-home {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        color: var(--primary);
+        font-size: 1.5rem;
+        transition: 0.3s;
+    }
+    
     .main-content { margin-right: 0; }
     .stats-cards { grid-template-columns: 1fr; }
 }

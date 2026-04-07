@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /projects/*/script.js
+Disallow: /projects/*/style.css
+Sitemap: https://AbedAraheem.github.io/sitemap.xml

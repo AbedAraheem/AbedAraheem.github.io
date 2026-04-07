@@ -290,6 +290,17 @@ body.dark-theme .input-group input, body.dark-theme .input-group select { backgr
     .mobile-menu-trigger { display: flex !important; }
     #mobile-menu-btn i { color: var(--text-dark); }
     
+    .mobile-back-home {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        color: var(--primary);
+        font-size: 1.5rem;
+        transition: 0.3s;
+    }
+    
     /* Overlay for Sidebar Drawer */
     .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9998; opacity: 0; transition: opacity 0.3s; }
     .menu-overlay.active { display: block !important; opacity: 1; }

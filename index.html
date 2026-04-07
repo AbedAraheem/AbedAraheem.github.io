@@ -7,6 +7,34 @@
     <title>عبد الرحيم خالد الهباش | مهندس برمجيات</title>
     <meta name="description"
         content="الموقع الشخصي للمهندس عبد الرحيم خالد الهباش - مهندس برمجيات متخصص في تطوير حلول الويب الحديثة.">
+    <meta name="keywords" content="عبد الرحيم خالد الهباش, مهندس برمجيات, مطور ويب, Software Engineer, Web Developer, Portfolio">
+    
+    <!-- Open Graph (Facebook / LinkedIn) -->
+    <meta property="og:title" content="عبد الرحيم خالد الهباش | مهندس برمجيات">
+    <meta property="og:description" content="البورتفوليو الشخصي للمهندس عبد الرحيم الهباش - حلول برمجية مبتكرة وتطبيقات ويب حديثة.">
+    <meta property="og:image" content="https://AbedAraheem.github.io/images/me.jpg">
+    <meta property="og:url" content="https://AbedAraheem.github.io/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="عبد الرحيم خالد الهباش | مهندس برمجيات">
+    <meta name="twitter:description" content="تصفح مشاريعي في هندسة البرمجيات وتطبيقات الويب.">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "عبد الرحيم خالد الهباش",
+      "jobTitle": "Software Engineer",
+      "url": "https://AbedAraheem.github.io/",
+      "sameAs": [
+        "https://www.linkedin.com/in/abdullrahim",
+        "https://github.com/AbedAraheem"
+      ]
+    }
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,18 +64,33 @@
                 <li><a href="#skills">المهارات</a></li>
                 <li><a href="#projects">المشاريع</a></li>
                 <li><a href="#contact">تواصل معي</a></li>
+                <li><a href="#" class="lang-toggle" title="Coming Soon">English</a></li>
             </ul>
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <div class="global-widgets" style="position:relative;">
-                    <button class="menu-btn" id="app-switcher-btn" title="تبديل المشاريع" style="background:transparent; border:none; cursor:pointer; width:auto; height:auto; padding:0; display:flex; align-items:center; justify-content:center; position: static;"><i class="fas fa-braille" style="font-size: 1.5rem; color: white;"></i></button>
-                    <div class="dropdown-menu app-grid glass" id="apps-dropdown" style="display:none; position:absolute; top:40px; left:0; width:280px; background:rgba(15, 23, 42, 0.95); border:1px solid rgba(255,255,255,0.1); border-radius:15px; padding:15px; box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:9999; grid-template-columns:1fr 1fr; gap:10px; backdrop-filter:blur(10px);">
-                        <a href="index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:white; background:rgba(168, 85, 247, 0.1); transition:backgroundColor 0.3s;"><i class="fas fa-home" style="font-size:1.5rem; color:#a855f7; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem; font-family: 'Cairo', sans-serif;">الرئيسية</span></a>
-                        <a href="projects/education-portal/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:white; transition:backgroundColor 0.3s;"><i class="fas fa-graduation-cap" style="font-size:1.5rem; color:#0ea5e9; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem; font-family: 'Cairo', sans-serif;">بوابة التعليم</span></a>
-                        <a href="projects/b2b-ecommerce/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:white; transition:backgroundColor 0.3s;"><i class="fas fa-store" style="font-size:1.5rem; color:#10b981; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem; font-family: 'Cairo', sans-serif;">منصة التاجر B2B</span></a>
-                        <a href="projects/devtrack-system/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:white; transition:backgroundColor 0.3s;"><i class="fas fa-terminal" style="font-size:1.5rem; color:#f59e0b; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem; font-family: 'Cairo', sans-serif;">نظام DevTrack</span></a>
+            <div class="nav-actions">
+                <div class="global-widgets">
+                    <button class="menu-btn icon-btn" id="app-switcher-btn" title="تبديل المشاريع">
+                        <i class="fas fa-braille"></i>
+                    </button>
+                    <div class="dropdown-menu app-grid glass" id="apps-dropdown">
+                        <a href="index.html" class="app-icon home">
+                            <i class="fas fa-home"></i>
+                            <span>الرئيسية</span>
+                        </a>
+                        <a href="projects/education-portal/index.html" class="app-icon education">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>بوابة التعليم</span>
+                        </a>
+                        <a href="projects/b2b-ecommerce/index.html" class="app-icon ecommerce">
+                            <i class="fas fa-store"></i>
+                            <span>منصة التاجر B2B</span>
+                        </a>
+                        <a href="projects/devtrack-system/index.html" class="app-icon devtrack">
+                            <i class="fas fa-terminal"></i>
+                            <span>نظام DevTrack</span>
+                        </a>
                     </div>
                 </div>
-                <div class="menu-btn" id="mobile-menu-toggle" style="position: static;">
+                <div class="menu-btn" id="mobile-menu-toggle">
                     <i class="fas fa-bars"></i>
                 </div>
             </div>
