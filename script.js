@@ -1,10 +1,10 @@
 /**
- * @fileoverview Main portfolio script with full Internationalization (i18n) support.
- * Manages UI interactions, form submission, and language switching.
+ * @fileoverview Professional i18n Engine & UI Controller
+ * Version 2.1 - Fixed App Switcher & Smooth UI
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // UI Elements
+    // Core Elements
     const navbar = document.getElementById('navbar');
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navLinksContainer = document.querySelector('.nav-links');
@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const appsDropdown = document.getElementById('apps-dropdown');
     const backToTopBtn = document.getElementById('back-to-top');
     const langSwitcher = document.getElementById('lang-switcher');
-    const body = document.body;
     const html = document.documentElement;
+    const metaDesc = document.getElementById('meta-description');
 
-    // Translation Dictionary
+    // High-Fidelity Translation Objects
     const translations = {
         ar: {
+            site_title: "عبد الرحيم خالد الهباش | مهندس برمجيات",
+            meta_desc: "الموقع الشخصي للمهندس عبد الرحيم خالد الهباش - مهندس برمجيات متخصص في تطوير حلول الويب الحديثة.",
             nav_logo: "عبد الرحيم",
             nav_home: "الرئيسية",
             nav_about: "نبذة عني",
@@ -31,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
             hero_btn_cv: "تحميل CV",
             hero_btn_contact: "تواصل معي",
             about_title: "نبذة عني",
-            about_p1: "أنا خريج تخصص نظم معلومات إدارية من جامعة الأقصى – دفعة 2026، ومهندس برمجيات شغوف بتطوير الحلول الرقمية وبناء تطبيقات الويب الحديثة. أمتلك خبرة تمتد لثلاث سنوات في مجال العمل الحر (Freelancing) في تصميم وتطوير مواقع الويب وتطبيقاتها، حيث عملت على إنشاء واجهات مستخدم احترافية وتطوير أنظمة ويب تلبي احتياجات العملاء بكفاءة عالية.",
-            about_p2: "أمتلك خبرة عملية في تحليل المشكلات التقنية ومعالجة الأخطاء البرمجية (Debugging)، إضافة إلى القدرة على فهم متطلبات المشاريع وتحويلها إلى حلول برمجية عملية وفعالة. أسعى دائمًا إلى تطوير مهاراتي التقنية وموااكية أحدث التقنيات في عالم تطوير البرمجيات، مع التركيز على بناء تطبيقات سريعة وآمنة وقابلة للتوسع.",
+            about_p1: "أنا خريج تخصص نظم معلومات إدارية من جامعة الأقصى – دفعة 2026، ومهندس برمجيات شغوف بتطوير الحلول الرقمية وبناء تطبيقات الويب الحديثة. أمتلك خبرة تمتد لثلاث سنوات في مجال العمل الحر (Freelancing) في تصميم وتطوير مواقع الويب وتطبيقاتها.",
+            about_p2: "أمتلك خبرة عملية في تحليل المشكلات التقنية ومعالجة الأخطاء البرمجية (Debugging)، إضافة إلى القدرة على فهم متطلبات المشاريع وتحويلها إلى حلول برمجية عملية وفعالة.",
             about_p3: "أؤمن بأن البرمجة ليست مجرد كتابة كود، بل هي فن تحويل الأفكار إلى حلول رقمية مبتكرة تسهم في تطوير الأعمال وتحسين تجربة المستخدم.",
             stat_years: "سنوات خبرة",
             stat_projects: "مشروع مكتمل",
@@ -59,6 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
             footer_copy: "&copy; 2026 عبد الرحيم خالد الهباش. جميع الحقوق محفوظة."
         },
         en: {
+            site_title: "Abdul-Rahim Al-Habbash | Software Engineer",
+            meta_desc: "Personal portfolio of Abdul-Rexim Al-Habbash - Software Engineer specializing in modern web solutions.",
             nav_logo: "Abdul-Rahim",
             nav_home: "Home",
             nav_about: "About",
@@ -67,41 +71,41 @@ document.addEventListener('DOMContentLoaded', () => {
             nav_contact: "Contact",
             hero_welcome: 'Hi, I am <span class="gradient-text">Abdul-Rahim Al-Habbash</span>',
             hero_job: "Software Engineer",
-            hero_tagline: "A passionate software engineer focused on developing modern digital solutions and building high-performance web applications that combine beautiful design with technical efficiency.",
-            hero_btn_projects: "View My Works",
+            hero_tagline: "Passionate software engineer focused on developing modern digital solutions and building high-performance web applications that merge aesthetics with efficiency.",
+            hero_btn_projects: "View My Work",
             hero_btn_cv: "Download CV",
-            hero_btn_contact: "Contact Me",
-            about_title: "About Me",
-            about_p1: "I am a graduate in Management Information Systems from Al-Aqsa University – Class of 2026, and a software engineer passionate about developing digital solutions and modern web applications. I have three years of experience in freelancing, designing and developing websites and applications, where I created professional user interfaces and web systems with high efficiency.",
-            about_p2: "I have practical experience in analyzing technical problems and debugging, in addition to the ability to understand project requirements and transform them into practical and effective software solutions. I always strive to develop my technical skills and keep pace with the latest technologies in the software world.",
-            about_p3: "I believe that programming is not just writing code, but an art of transforming ideas into innovative digital solutions that contribute to business development and improve the user experience.",
-            stat_years: "Years Experience",
-            stat_projects: "Projects Completed",
-            stat_satisfaction: "Customer Satisfaction",
-            skills_title: "Technical Skills",
-            projects_title: "Professional Projects",
-            p1_title: "SmartEdu Portal",
-            p1_desc: "An integrated educational platform for managing students, grades, and academic tasks with a modern design (Glassmorphism).",
-            p2_title: "Merchant B2B Platform",
-            p2_desc: "An advanced business dashboard (B2B) that allows merchants to monitor sales, inventory, and reports with high accuracy.",
-            p3_title: "Task Tracking (DevTrack)",
-            p3_desc: "A professional system for developers to manage tasks (Kanban) and track programming errors (Bug Tracking).",
-            app_home: "Home",
-            app_edu: "Edu Portal",
+            hero_btn_contact: "Get in Touch",
+            about_title: "Background",
+            about_p1: "Graduate of Management Information Systems from Al-Aqsa University – Class of 2026. I am a software engineer passionate about modern web ecosystem with 3+ years of experience in freelancing and design.",
+            about_p2: "Skilled in technical problem-solving and debugging. I excel at translating complex business requirements into high-performance software and technical deliverables.",
+            about_p3: "I believe programming is't just coding—it's the art of converting vision into innovative digital reality that drives business growth.",
+            stat_years: "Years of Experience",
+            stat_projects: "Projects Delivered",
+            stat_satisfaction: "Positive Feedback",
+            skills_title: "Technical Expertise",
+            projects_title: "Featured Projects",
+            p1_title: "Smart Education Portal",
+            p1_desc: "A comprehensive education management platform for tracking students and grades using Glassmorphism UI.",
+            p2_title: "B2B Merchant System",
+            p2_desc: "Advanced commercial dashboard for B2B operations with real-time analytics and inventory control.",
+            p3_title: "DevTrack Task Manager",
+            p3_desc: "Developer-centric Kanban system for task management and bug tracking with a specialized dark theme.",
+            app_home: "Portfolio Home",
+            app_edu: "SmartEdu Portal",
             app_b2b: "B2B Merchant",
             app_devtrack: "DevTrack",
-            contact_title: "Contact Me",
-            contact_name: "Name",
-            contact_email: "Email",
-            contact_msg: "Message",
+            contact_title: "Start a Conversation",
+            contact_name: "Full Name",
+            contact_email: "Email Address",
+            contact_msg: "Message Content",
             contact_submit: "Send Message",
-            placeholder_name: "Enter your full name",
-            placeholder_msg: "Write your message here...",
-            footer_copy: "&copy; 2026 Abdul-Rahim Al-Habbash. All Rights Reserved."
+            placeholder_name: "e.g. John Doe",
+            placeholder_msg: "What's on your mind?...",
+            footer_copy: "&copy; 2026 Abdul-Rahim Al-Habbash. Built with Passion."
         }
     };
 
-    // --- Language Management ---
+    // --- High-Resolution Language Logic ---
     let currentLang = localStorage.getItem('preferredLang') || 'ar';
 
     const updateLanguage = (lang) => {
@@ -111,50 +115,59 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang][key]) {
-                el.innerHTML = translations[lang][key];
+                if (el.tagName === 'TITLE') {
+                    document.title = translations[lang][key];
+                } else if (el.id === 'meta-description') {
+                    el.setAttribute('content', translations[lang][key]);
+                } else {
+                    el.innerHTML = translations[lang][key];
+                }
             }
         });
 
-        // Update Placeholders
+        // Placeholder Translation
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
             const key = el.getAttribute('data-i18n-placeholder');
-            if (translations[lang][key]) {
-                el.placeholder = translations[lang][key];
-            }
+            if (translations[lang][key]) el.placeholder = translations[lang][key];
         });
 
-        // Update Direction and Font
+        // Layout & Directional Re-flow
         if (lang === 'en') {
             html.setAttribute('dir', 'ltr');
             html.setAttribute('lang', 'en');
-            body.classList.add('lang-en');
+            document.body.classList.add('lang-en');
             langSwitcher.textContent = 'العربية';
+            // Flip icons that indicate direction
+            document.querySelectorAll('.flip-icon').forEach(icon => {
+                icon.classList.remove('fa-arrow-left');
+                icon.classList.add('fa-arrow-right');
+            });
         } else {
             html.setAttribute('dir', 'rtl');
             html.setAttribute('lang', 'ar');
-            body.classList.remove('lang-en');
+            document.body.classList.remove('lang-en');
             langSwitcher.textContent = 'English';
+            // Flip back
+            document.querySelectorAll('.flip-icon').forEach(icon => {
+                icon.classList.remove('fa-arrow-right');
+                icon.classList.add('fa-arrow-left');
+            });
         }
     };
 
-    // Initial language setup
-    updateLanguage(currentLang);
+    // Initialize
+    if (langSwitcher) {
+        updateLanguage(currentLang);
+        langSwitcher.addEventListener('click', (e) => {
+            e.preventDefault();
+            updateLanguage(currentLang === 'ar' ? 'en' : 'ar');
+        });
+    }
 
-    langSwitcher.addEventListener('click', (e) => {
-        e.preventDefault();
-        updateLanguage(currentLang === 'ar' ? 'en' : 'ar');
-    });
-
-
-    // --- UI Logic ---
+    // --- Standard UI Controllers (Optimized) ---
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-            backToTopBtn.classList.add('show');
-        } else {
-            navbar.classList.remove('scrolled');
-            backToTopBtn.classList.remove('show');
-        }
+        if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
+        if (backToTopBtn) backToTopBtn.classList.toggle('show', window.scrollY > 300);
     });
 
     if (mobileMenuToggle) {
@@ -165,26 +178,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (appSwitcherBtn) {
+    // App Switcher Dropdown (Fixed with 'active' class)
+    if (appSwitcherBtn && appsDropdown) {
         appSwitcherBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            appsDropdown.classList.toggle('show');
+            appsDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!appsDropdown.contains(e.target) && !appSwitcherBtn.contains(e.target)) {
+                appsDropdown.classList.remove('active');
+            }
         });
     }
 
-    document.addEventListener('click', () => {
-        if (appsDropdown) appsDropdown.classList.remove('show');
-    });
-
-    // Form Submission Logic
+    // Contact Form (Async with i18n feedback)
     const contactForm = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
 
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const formData = new FormData(contactForm);
-
             formMessage.style.display = 'block';
             formMessage.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
             formMessage.className = 'status-info';
@@ -192,35 +207,27 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch(contactForm.action, {
                     method: 'POST',
-                    body: formData,
+                    body: new FormData(contactForm),
                     headers: { 'Accept': 'application/json' }
                 });
-
                 if (response.ok) {
-                    formMessage.textContent = currentLang === 'ar' ? 'تم الإرسال بنجاح! شكراً لتواصلك.' : 'Sent successfully! Thank you.';
+                    formMessage.textContent = currentLang === 'ar' ? 'تم الإرسال بنجاح!' : 'Sent successfully!';
                     formMessage.className = 'status-success';
                     contactForm.reset();
-                } else {
-                    throw new Error();
-                }
-            } catch (err) {
-                formMessage.textContent = currentLang === 'ar' ? 'عذراً، حدث خطأ. حاول مجدداً.' : 'Sorry, an error occurred. Try again.';
+                } else throw new Error();
+            } catch {
+                formMessage.textContent = currentLang === 'ar' ? 'حدث خطأ. حاول مجدداً.' : 'Error. Try again.';
                 formMessage.className = 'status-error';
             }
         });
     }
 
-    // Scroll Animations (Simple Reveal)
-    const reveals = document.querySelectorAll('.reveal');
-    const revealOnScroll = () => {
-        reveals.forEach(el => {
-            const windowHeight = window.innerHeight;
-            const elementTop = el.getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) {
-                el.classList.add('active');
-            }
+    // Scroll Reveal (Improved Performance)
+    const reveal = () => {
+        document.querySelectorAll('.reveal').forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
         });
     };
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Trigger initial
+    window.addEventListener('scroll', reveal);
+    reveal();
 });
