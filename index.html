@@ -65,7 +65,7 @@
         </nav>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section id="hero" class="section">
         <div class="container hero-content">
             <div class="avatar-container reveal">
@@ -74,11 +74,9 @@
                 </div>
                 <div class="avatar-glow"></div>
             </div>
-            <h1 class="reveal"><span data-i18n="hero_welcome_prefix">أهلاً، أنا</span> <span class="gradient-text" data-i18n="hero_name">عبد الرحيم الهباش</span></h1>
+            <h1 class="reveal"><span data-i18n="hero_welcome_prefix">أهلاً، أنا</span> <span class="gradient-text" data-i18n="hero_name">عبد الرحيم خالد الهباش</span></h1>
             <h2 class="reveal" data-i18n="hero_job">مهندس برمجيات</h2>
-            <p class="tagline reveal" data-i18n="hero_tagline">
-                مهندس برمجيات شغوف بتطوير الحلول الرقمية الحديثة التي تجمع بين الجمال والذكاء التقني.
-            </p>
+            <p class="tagline reveal" data-i18n="hero_tagline">مهندس برمجيات شغوف بتطوير الحلول الرقمية الحديثة وبناء تطبيقات ويب عالية الأداء تجمع بين التصميم الجميل والكفاءة التقنية.</p>
             <div class="hero-btns reveal">
                 <a href="#projects" class="btn btn-primary"><span data-i18n="hero_btn_projects">مشاهدة مشاريعي</span> <i class="fas fa-arrow-left flip-icon"></i></a>
                 <a href="assets/cv.pdf" class="btn btn-cv" download><span data-i18n="hero_btn_cv">تحميل CV</span> <i class="fas fa-file-download"></i></a>
@@ -87,14 +85,17 @@
         </div>
     </section>
 
-    <!-- About -->
+    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
             <h2 class="section-title" data-i18n="about_title">نبذة عني</h2>
             <div class="about-grid">
                 <div class="about-text reveal">
-                    <p data-i18n="about_p1">خريج تخصص نظم معلومات إدارية من جامعة الأقصى – دفعة 2026. مهندس برمجيات شغوف ببناء تطبيقات الويب الحديثة وحل المشكلات التقنية بكفاءة عالية.</p>
-                    <p data-i18n="about_p2">أمتلك خبرة عملية في تحليل المتطلبات وتحويلها إلى واقع رقمي مبهر، مع التركيز على الأمان وسرعة الأداء.</p>
+                    <p data-i18n="about_p1">أنا خريج تخصص نظم معلومات إدارية من جامعة الأقصى – دفعة 2026، ومهندس برمجيات شغوف بتطوير الحلول الرقمية وبناء تطبيقات الويب الحديثة. أمتلك خبرة تمتد لثلاث سنوات في مجال العمل الحر (Freelancing).</p>
+                    <p data-i18n="about_p2">أمتلك خبرة عملية في تحليل المشكلات التقنية ومعالجة الأخطاء البرمجية (Debugging)، مع التركيز على بناء تطبيقات سريعة وآمنة وقابلة للتوسع.</p>
+                    <div class="about-btns" style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="assets/cv.pdf" class="btn btn-cv" download>تحميل CV <i class="fas fa-file-download"></i></a>
+                    </div>
                 </div>
                 <div class="about-stats reveal">
                     <div class="stat-card"><h3>+3</h3><span data-i18n="stat_years">سنوات خبرة</span></div>
@@ -104,11 +105,37 @@
         </div>
     </section>
 
-    <!-- Projects -->
+    <!-- Skills Section (Restored Old Data) -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="skills_title">مهاراتي التقنية</h2>
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <i class="fab fa-js-square" style="color: #f7df1e;"></i>
+                    <h3>JavaScript</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-card reveal">
+                    <i class="fab fa-react" style="color: #61dafb;"></i>
+                    <h3>React / Next.js</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 88%;"></div></div>
+                </div>
+                <div class="skill-card reveal">
+                    <i class="fab fa-python" style="color: #3776ab;"></i>
+                    <h3>Python</h3>
+                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                </div>
+                <!-- ... other skills ... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Restored Old Data) -->
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title" data-i18n="projects_title">مشاريعي</h2>
+            <h2 class="section-title" data-i18n="projects_title">مشاريعي الاحترافية</h2>
             <div class="projects-grid">
+                <!-- Project 1 -->
                 <div class="project-card reveal">
                     <div class="project-img">
                         <img src="./images/projects/smartedu_cover.png" alt="SmartEdu">
@@ -117,19 +144,51 @@
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3 data-i18n="p1_title">بوابة التعليم</h3>
-                        <p data-i18n="p1_desc">منصة تعليمية متكاملة بتصميم زجاجي عصري.</p>
+                        <h3 data-i18n="p1_title">بوابة التعليم الذكية (SmartEdu)</h3>
+                        <p data-i18n="p1_desc">منصة تعليمية متكاملة لإدارة الطلاب والدرجات والمهام الدراسية بتصميم عصري.</p>
                     </div>
                 </div>
-                <!-- Other projects follow same pattern -->
             </div>
         </div>
     </section>
 
-    <!-- Footer Logic -->
+    <!-- Social Side Bar (RE-ESTABLISHED) -->
+    <div class="social-links-fixed">
+        <a href="https://github.com/AbedAraheem" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/abdullrahim" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/#" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:0595732675geehe@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <!-- Contact Section (RE-ESTABLISHED) -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="contact_title">تواصل معي</h2>
+            <div class="contact-container reveal">
+                <form id="contact-form" action="https://formsubmit.co/0595732675geehe@gmail.com" method="POST">
+                    <div class="form-group">
+                        <label for="name" data-i18n="contact_name">الاسم</label>
+                        <input type="text" id="name" name="name" data-i18n-placeholder="placeholder_name" placeholder="أدخل اسمك الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="contact_email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-i18n="contact_msg">الرسالة</label>
+                        <textarea id="message" name="message" rows="5" data-i18n-placeholder="placeholder_msg" placeholder="اكتب رسالتك هنا..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full" data-i18n="contact_submit">إرسال الرسالة <i class="fas fa-paper-plane"></i></button>
+                    <div id="form-message" style="display: none; margin-top: 15px; padding: 15px; border-radius: 8px; text-align: center;"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container footer-content">
-            <p data-i18n="footer_copy">&copy; 2026 عبد الرحيم الهباش. جميع الحقوق محفوظة.</p>
+            <p data-i18n="footer_copy">&copy; 2026 عبد الرحيم خالد الهباش. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
