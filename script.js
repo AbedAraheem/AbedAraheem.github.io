@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(contactForm);
-            
+
             formMessage.style.display = 'block';
             formMessage.textContent = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
             formMessage.className = 'status-info';
