@@ -146,8 +146,32 @@
         @media print {
             body { padding: 0; background: white; }
             .print-btn { display: none; }
-            .cv-page { box-shadow: none; margin: 0; width: 100%; max-width: none; }
-            @page { margin: 0; }
+            .cv-page { box-shadow: none; margin: 0; width: 100%; max-width: none; border: none; }
+            .sidebar { 
+                background: white !important; 
+                color: #000 !important; 
+                border-left: 1px solid #eee; 
+                padding: 40px 20px;
+            }
+            .sidebar-title { 
+                color: #000 !important; 
+                border-bottom: 2px solid #000 !important; 
+            }
+            .contact-item { 
+                color: #000 !important; 
+                font-weight: 600;
+            }
+            .contact-item i { 
+                color: #000 !important; 
+            }
+            .skill-bar { 
+                background: #eee !important; 
+                border: 1px solid #ddd;
+            }
+            .skill-progress { 
+                background: #333 !important; 
+            }
+            @page { margin: 0.5cm; }
         }
 
         @media (max-width: 768px) {
@@ -187,7 +211,7 @@
                 </div>
                 <a href="https://AbedAraheem.github.io/" target="_blank" class="contact-item">
                     <i class="fas fa-globe"></i>
-                    <span>AbedAraheem.github.io</span>
+                    <span>الموقع الشخصي</span>
                 </a>
                 <a href="https://www.linkedin.com/in/abdullrahim" target="_blank" class="contact-item">
                     <i class="fab fa-linkedin"></i>
