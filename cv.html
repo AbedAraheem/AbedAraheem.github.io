@@ -72,11 +72,21 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
             word-break: break-all;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s ease;
+            padding: 5px 0;
         }
-        .contact-item i { color: var(--accent); min-width: 20px; text-align: center; }
+        .contact-item:hover { color: var(--accent); transform: translateX(-5px); }
+        .contact-item i { 
+            color: var(--accent); 
+            min-width: 24px; 
+            text-align: center; 
+            font-size: 1.1rem;
+        }
 
         .skill-item { margin-bottom: 12px; }
         .skill-name { font-size: 0.85rem; margin-bottom: 5px; display: block; }
@@ -159,30 +169,34 @@
 
             <section class="sidebar-section">
                 <h3 class="sidebar-title"><i class="fas fa-user-tag"></i> تواصل معي</h3>
-                <div class="contact-item">
+                <a href="tel:0595732675" class="contact-item">
                     <i class="fas fa-phone"></i>
                     <span>0595732675</span>
-                </div>
-                <div class="contact-item">
+                </a>
+                <a href="https://wa.me/970595732675" target="_blank" class="contact-item">
                     <i class="fab fa-whatsapp"></i>
                     <span>+970595732675</span>
-                </div>
-                <div class="contact-item">
+                </a>
+                <a href="mailto:0595732675geehe@gmail.com" class="contact-item">
                     <i class="fas fa-envelope"></i>
                     <span>0595732675geehe@gmail.com</span>
-                </div>
+                </a>
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>غزة، فلسطين</span>
                 </div>
-                <div class="contact-item">
+                <a href="https://AbedAraheem.github.io/" target="_blank" class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <span>AbedAraheem.github.io</span>
+                </a>
+                <a href="https://www.linkedin.com/in/abdullrahim" target="_blank" class="contact-item">
                     <i class="fab fa-linkedin"></i>
                     <span>linkedin.com/in/abdullrahim</span>
-                </div>
-                <div class="contact-item">
+                </a>
+                <a href="https://github.com/AbedAraheem" target="_blank" class="contact-item">
                     <i class="fab fa-github"></i>
                     <span>github.com/AbedAraheem</span>
-                </div>
+                </a>
             </section>
 
             <section class="sidebar-section">
