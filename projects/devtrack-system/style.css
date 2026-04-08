@@ -599,4 +599,23 @@ body {
     background: rgba(34, 197, 94, 0.05) !important;
     box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
 }
+/* --- Navigation Bridge (App Switcher) --- */
+#apps-dropdown {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
 
+#apps-dropdown.active {
+    display: grid !important;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#apps-dropdown a:hover {
+    background: rgba(34, 197, 94, 0.1) !important;
+    transform: scale(1.05);
+}

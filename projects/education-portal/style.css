@@ -950,6 +950,26 @@ body {
 /* ==============================================
    MOBILE RESPONSIVE DESIGN (NATIVE APP FEEL)
 ============================================== */
+/* --- Navigation Bridge (App Switcher) --- */
+#edu-apps-dropdown {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#edu-apps-dropdown.active {
+    display: grid !important;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#edu-apps-dropdown a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: scale(1.05);
+}
 @media (max-width: 1024px) {
     .dashboard-grid { grid-template-columns: 1fr; }
     .stats-cards { grid-template-columns: 1fr 1fr; }

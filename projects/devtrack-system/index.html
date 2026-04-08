@@ -73,11 +73,23 @@
                             </div>
                         </div>
                         <button class="dev-btn btn-secondary" id="app-switcher-btn" title="تبديل المشاريع" style="padding: 10px; border-radius: 12px; height: 45px; width: 45px; display: flex; align-items: center; justify-content: center; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); cursor:pointer;"><i class="fas fa-braille" style="margin:0; font-size:1.2rem; color:var(--primary);"></i></button>
-                        <div class="dropdown-menu app-grid" id="apps-dropdown" style="display:none; position:absolute; top:55px; left:0; width:280px; background:rgba(15, 23, 42, 0.95); border:1px solid rgba(255,255,255,0.1); border-radius:15px; padding:15px; box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:9999; grid-template-columns:1fr 1fr; gap:10px; backdrop-filter:blur(10px);">
-                            <a href="../../index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-main); transition:backgroundColor 0.3s;"><i class="fas fa-user-circle" style="font-size:1.5rem; color:#8b5cf6; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">الملف الشخصي</span></a>
-                            <a href="../education-portal/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-main); transition:backgroundColor 0.3s;"><i class="fas fa-graduation-cap" style="font-size:1.5rem; color:#0ea5e9; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">بوابة التعليم</span></a>
-                            <a href="../b2b-ecommerce/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-main); transition:backgroundColor 0.3s;"><i class="fas fa-store" style="font-size:1.5rem; color:#10b981; display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">B2B التاجر</span></a>
-                            <a href="../devtrack-system/index.html" class="app-icon" style="text-align:center; padding:10px; border-radius:10px; text-decoration:none; color:var(--text-main); background:rgba(0, 210, 255, 0.1); transition:backgroundColor 0.3s;"><i class="fas fa-terminal" style="font-size:1.5rem; color:var(--primary); display:block; margin-bottom:5px;"></i><span style="font-size:0.8rem;">DevTrack</span></a>
+                        <div id="apps-dropdown" style="display:none; position:absolute; top:55px; left:0; width:300px; background:rgba(9, 9, 11, 0.98); border:1px solid rgba(255, 255, 255, 0.1); border-radius:15px; padding:20px; box-shadow:0 15px 40px rgba(0,0,0,0.7); z-index:9999; grid-template-columns:repeat(2, 1fr); gap:15px; backdrop-filter:blur(15px);">
+                            <a href="../../index.html" style="text-align:center; padding:15px; border-radius:12px; text-decoration:none; color:var(--text-main); display:flex; flex-direction:column; align-items:center; gap:8px; transition:0.3s; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05);">
+                                <i class="fas fa-user-circle" style="font-size:1.4rem; color:#8b5cf6;"></i>
+                                <span style="font-size:0.8rem; font-family:'Cairo',sans-serif;">الملف الشخصي</span>
+                            </a>
+                            <a href="../education-portal/index.html" style="text-align:center; padding:15px; border-radius:12px; text-decoration:none; color:var(--text-main); display:flex; flex-direction:column; align-items:center; gap:8px; transition:0.3s; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05);">
+                                <i class="fas fa-graduation-cap" style="font-size:1.4rem; color:#00d2ff;"></i>
+                                <span style="font-size:0.8rem; font-family:'Cairo',sans-serif;">بوابة التعليم</span>
+                            </a>
+                            <a href="../b2b-ecommerce/index.html" style="text-align:center; padding:15px; border-radius:12px; text-decoration:none; color:var(--text-main); display:flex; flex-direction:column; align-items:center; gap:8px; transition:0.3s; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05);">
+                                <i class="fas fa-store" style="font-size:1.4rem; color:#10b981;"></i>
+                                <span style="font-size:0.8rem; font-family:'Cairo',sans-serif;">منصة التاجر</span>
+                            </a>
+                            <a href="../devtrack-system/index.html" style="text-align:center; padding:15px; border-radius:12px; text-decoration:none; color:var(--text-main); display:flex; flex-direction:column; align-items:center; gap:8px; transition:0.3s; background:rgba(34, 197, 94, 0.1); border:1px solid var(--primary);">
+                                <i class="fas fa-terminal" style="font-size:1.4rem; color:var(--primary);"></i>
+                                <span style="font-size:0.8rem; font-family:'Cairo',sans-serif;">نظام DevTrack</span>
+                            </a>
                         </div>
                     </div>
                     <div class="dev-user">

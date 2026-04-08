@@ -577,12 +577,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (eduAppSwitcherBtn && eduAppsDropdown) {
         eduAppSwitcherBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = eduAppsDropdown.style.display !== 'none';
-            eduAppsDropdown.style.display = isOpen ? 'none' : 'grid';
+            eduAppsDropdown.classList.toggle('active');
         });
         document.addEventListener('click', (e) => {
             if (!eduAppSwitcherBtn.contains(e.target) && !eduAppsDropdown.contains(e.target)) {
-                eduAppsDropdown.style.display = 'none';
+                eduAppsDropdown.classList.remove('active');
             }
         });
     }

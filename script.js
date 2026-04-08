@@ -168,12 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (appSwitcherBtn) {
         appSwitcherBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            appsDropdown.classList.toggle('show');
+            appsDropdown.classList.toggle('active');
         });
     }
 
     document.addEventListener('click', () => {
-        if (appsDropdown) appsDropdown.classList.remove('show');
+        if (appsDropdown) appsDropdown.classList.remove('active');
     });
 
     // Form Submission Logic

@@ -439,6 +439,27 @@ body.dark-theme .input-group input, body.dark-theme .input-group select { backgr
 }
 
 /* Global Widgets Mobile Responsive */
+/* --- Navigation Bridge (App Switcher) --- */
+#apps-dropdown {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#apps-dropdown.active {
+    display: grid !important;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#apps-dropdown a:hover {
+    background: rgba(16, 185, 129, 0.1) !important;
+    transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
     .global-widgets {
         flex-wrap: wrap;

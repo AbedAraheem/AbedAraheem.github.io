@@ -501,15 +501,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (appSwitcherBtn && appsDropdown) {
         appSwitcherBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (appsDropdown.style.display === 'none') {
-                 appsDropdown.style.display = 'grid';
-            } else {
-                 appsDropdown.style.display = 'none';
-            }
+            appsDropdown.classList.toggle('active');
         });
         document.addEventListener('click', (e) => {
             if (!appSwitcherBtn.contains(e.target) && !appsDropdown.contains(e.target)) {
-                appsDropdown.style.display = 'none';
+                appsDropdown.classList.remove('active');
             }
         });
     }
