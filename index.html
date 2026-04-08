@@ -4,22 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="site_title">عبد الرحيم خالد الهباش | مهندس برمجيات</title>
-    <meta name="description" id="meta-description"
-        content="الموقع الشخصي للمهندس عبد الرحيم خالد الهباش - مهندس برمجيات متخصص في تطوير حلول الويب الحديثة." data-i18n="meta_desc">
-    <meta name="keywords" content="عبد الرحيم خالد الهباش, مهندس برمجيات, مطور ويب, Software Engineer, Web Developer, Portfolio">
+    <title>عبد الرحيم خالد الهباش | مهندس برمجيات</title>
+    <meta name="description"
+        content="الموقع الشخصي للمهندس عبد الرحيم خالد الهباش - مهندس برمجيات متخصص في تطوير حلول الويب الحديثة.">
+    <meta name="keywords"
+        content="عبد الرحيم خالد الهباش, مهندس برمجيات, مطور ويب, Software Engineer, Web Developer, Portfolio">
 
-    <!-- Fonts & Icons -->
+    <!-- Open Graph (Facebook / LinkedIn) -->
+    <meta property="og:title" content="عبد الرحيم خالد الهباش | مهندس برمجيات">
+    <meta property="og:description"
+        content="البورتفوليو الشخصي للمهندس عبد الرحيم الهباش - حلول برمجية مبتكرة وتطبيقات ويب حديثة.">
+    <meta property="og:image" content="https://AbedAraheem.github.io/images/me.jpg">
+    <meta property="og:url" content="https://AbedAraheem.github.io/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="عبد الرحيم خالد الهباش | مهندس برمجيات">
+    <meta name="twitter:description" content="تصفح مشاريعي في هندسة البرمجيات وتطبيقات الويب.">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "عبد الرحيم خالد الهباش",
+      "jobTitle": "Software Engineer",
+      "url": "https://AbedAraheem.github.io/",
+      "sameAs": [
+        "https://www.linkedin.com/in/abdullrahim",
+        "https://github.com/AbedAraheem"
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Header -->
+    <!-- Header / Navbar -->
     <header id="navbar">
         <nav class="container">
             <div class="logo">
@@ -35,7 +70,7 @@
             </ul>
             <div class="nav-actions">
                 <div class="global-widgets">
-                    <button class="icon-btn" id="app-switcher-btn" title="تبديل المشاريع">
+                    <button class="menu-btn icon-btn" id="app-switcher-btn" title="تبديل المشاريع">
                         <i class="fas fa-braille"></i>
                     </button>
                     <div class="dropdown-menu app-grid glass" id="apps-dropdown">
@@ -57,35 +92,43 @@
                         </a>
                     </div>
                 </div>
-                <div class="menu-btn" id="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
+                <div class="menu-btn" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </nav>
     </header>
-
-    <!-- Side Social Bar -->
-    <div class="social-links-fixed">
-        <a href="https://github.com/AbedAraheem" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/abdullrahim" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://x.com/#" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="mailto:0595732675geehe@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-    </div>
 
     <!-- Hero Section -->
     <section id="hero" class="section">
         <div class="container hero-content">
             <div class="avatar-container reveal">
-                <div class="avatar-main"><img src="images/me.jpg?v=2" alt="Me" class="avatar-img"></div>
+                <div class="avatar-main">
+                    <img src="images/me.jpg?v=2" alt="عبد الرحيم خالد الهباش" class="avatar-img">
+                </div>
+                <div class="avatar-ring ring-1"></div>
+                <div class="avatar-ring ring-2"></div>
                 <div class="avatar-glow"></div>
             </div>
-            <h1 class="reveal"><span data-i18n="hero_welcome_prefix">أهلاً، أنا</span> <span class="gradient-text" data-i18n="hero_name">عبد الرحيم خالد الهباش</span></h1>
+            <h1 class="reveal" data-i18n="hero_welcome">أهلاً، أنا <span class="gradient-text">عبد الرحيم خالد
+                    الهباش</span></h1>
             <h2 class="reveal" data-i18n="hero_job">مهندس برمجيات</h2>
-            <p class="tagline reveal" data-i18n="hero_tagline">مهندس برمجيات شغوف بتطوير الحلول الرقمية الحديثة وبناء تطبيقات ويب عالية الأداء تجمع بين التصميم الجميل والكفاءة التقنية.</p>
+            <p class="tagline reveal" data-i18n="hero_tagline">
+                مهندس برمجيات شغوف بتطوير الحلول الرقمية الحديثة وبناء تطبيقات ويب عالية الأداء تجمع بين التصميم الجميل
+                والكفاءة التقنية.
+            </p>
             <div class="hero-btns reveal">
-                <a href="#projects" class="btn btn-primary"><span data-i18n="hero_btn_projects">مشاهدة مشاريعي</span> <i class="fas fa-arrow-left flip-icon"></i></a>
-                <a href="assets/cv.pdf" class="btn btn-cv" download><span data-i18n="hero_btn_cv">تحميل CV</span> <i class="fas fa-file-download"></i></a>
+                <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_projects">مشاهدة مشاريعي <i
+                        class="fas fa-arrow-left"></i></a>
+                <a href="assets/cv.pdf" class="btn btn-cv" download data-i18n="hero_btn_cv">تحميل CV <i
+                        class="fas fa-file-download"></i></a>
                 <a href="#contact" class="btn btn-outline" data-i18n="hero_btn_contact">تواصل معي</a>
             </div>
         </div>
+        <a href="#about" class="scroll-indicator">
+            <div class="mouse"></div>
+            <span>انقر للأسفل</span>
+        </a>
     </section>
 
     <!-- About Section -->
@@ -94,18 +137,48 @@
             <h2 class="section-title" data-i18n="about_title">نبذة عني</h2>
             <div class="about-grid">
                 <div class="about-text reveal">
-                    <p data-i18n="about_p1">أنا خريج تخصص نظم معلومات إدارية من جامعة الأقصى – دفعة 2026، ومهندس برمجيات شغوف بتطوير الحلول الرقمية وبناء تطبيقات الويب الحديثة.</p>
-                    <p data-i18n="about_p2">أمتلك خبرة عملية في تحليل المشكلات التقنية ومعالجة الأخطاء البرمجية، مع التركيز على بناء تطبيقات سريعة وآمنة وقابلة للتوسع.</p>
+                    <p data-i18n="about_p1">
+                        أنا خريج تخصص نظم معلومات إدارية من جامعة الأقصى – دفعة 2026، ومهندس برمجيات شغوف بتطوير الحلول
+                        الرقمية وبناء تطبيقات الويب الحديثة. أمتلك خبرة تمتد لثلاث سنوات في مجال العمل الحر
+                        (Freelancing) في تصميم وتطوير مواقع الويب وتطبيقاتها، حيث عملت على إنشاء واجهات مستخدم احترافية
+                        وتطوير أنظمة ويب تلبي احتياجات العملاء بكفاءة عالية.
+                    </p>
+                    <p data-i18n="about_p2">
+                        أمتلك خبرة عملية في تحليل المشكلات التقنية ومعالجة الأخطاء البرمجية (Debugging)، إضافة إلى
+                        القدرة على فهم متطلبات المشاريع وتحويلها إلى حلول برمجية عملية وفعالة. أسعى دائمًا إلى تطوير
+                        مهاراتي التقنية ومواكبة أحدث التقنيات في عالم تطوير البرمجيات، مع التركيز على بناء تطبيقات سريعة
+                        وآمنة وقابلة للتوسع.
+                    </p>
+                    <p data-i18n="about_p3">
+                        أؤمن بأن البرمجة ليست مجرد كتابة كود، بل هي فن تحويل الأفكار إلى حلول رقمية مبتكرة تسهم في تطوير
+                        الأعمال وتحسين تجربة المستخدم.
+                    </p>
+                    <div class="about-btns" style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="assets/cv.pdf" class="btn btn-cv" download>تحميل السيرة الذاتية <i
+                                class="fas fa-file-download"></i></a>
+                        <a href="https://www.linkedin.com/in/abdullrahim" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-outline">حسابي في LinkedIn <i class="fab fa-linkedin"></i></a>
+                    </div>
                 </div>
                 <div class="about-stats reveal">
-                    <div class="stat-card"><h3>+3</h3><span data-i18n="stat_years">سنوات خبرة</span></div>
-                    <div class="stat-card"><h3>+20</h3><span data-i18n="stat_projects">مشروع مكتمل</span></div>
+                    <div class="stat-card">
+                        <h3>+3</h3>
+                        <span data-i18n="stat_years">سنوات خبرة</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>+20</h3>
+                        <span data-i18n="stat_projects">مشروع مكتمل</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>100%</h3>
+                        <span data-i18n="stat_satisfaction">رضا العملاء</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section (FULL RESTORED) -->
+    <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title" data-i18n="skills_title">مهاراتي التقنية</h2>
@@ -113,99 +186,165 @@
                 <div class="skill-card reveal">
                     <i class="fab fa-js-square" style="color: #f7df1e;"></i>
                     <h3>JavaScript</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%;"></div>
+                    </div>
                 </div>
                 <div class="skill-card reveal">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TS" width="40">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"
+                        alt="TS" width="40">
                     <h3>TypeScript</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%;"></div>
+                    </div>
                 </div>
                 <div class="skill-card reveal">
                     <i class="fab fa-python" style="color: #3776ab;"></i>
                     <h3>Python</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
                 </div>
                 <div class="skill-card reveal">
                     <i class="fab fa-html5" style="color: #e34f26;"></i>
                     <h3>HTML5</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 95%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 95%;"></div>
+                    </div>
                 </div>
                 <div class="skill-card reveal">
                     <i class="fab fa-css3-alt" style="color: #1572b6;"></i>
                     <h3>CSS3</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%;"></div>
+                    </div>
                 </div>
                 <div class="skill-card reveal">
                     <i class="fab fa-node-js" style="color: #339933;"></i>
                     <h3>Node.js</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%;"></div>
+                    </div>
                 </div>
                 <div class="skill-card reveal">
                     <i class="fab fa-react" style="color: #61dafb;"></i>
                     <h3>React / Next.js</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 88%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 88%;"></div>
+                    </div>
                 </div>
                 <div class="skill-card reveal">
                     <i class="fas fa-plug" style="color: #00bcd4;"></i>
                     <h3>REST APIs</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 92%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 92%;"></div>
+                    </div>
                 </div>
                 <div class="skill-card reveal">
                     <i class="fas fa-database" style="color: #4479a1;"></i>
                     <h3>Databases</h3>
-                    <div class="progress-bar"><div class="progress" style="width: 82%;"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 82%;"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section (FULL RESTORED) -->
+    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title" data-i18n="projects_title">مشاريعي الاحترافية</h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
+                <!-- Project 1: Smart Education Portal -->
                 <div class="project-card reveal">
                     <div class="project-img">
-                        <img src="./images/projects/smartedu_cover.png" alt="SmartEdu">
+                        <img src="./images/projects/smartedu_cover.png" alt="SmartEdu Portal" class="project-cover">
                         <div class="project-overlay">
-                            <a href="projects/education-portal/index.html" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <div class="project-links">
+                                <a href="projects/education-portal/index.html" class="project-link" target="_blank"><i
+                                        class="fas fa-external-link-alt"></i> عرض حي</a>
+                                <a href="https://github.com/AbedAraheem" class="project-link" target="_blank"><i
+                                        class="fab fa-github"></i> الكود</a>
+                            </div>
                         </div>
                     </div>
                     <div class="project-info">
                         <h3 data-i18n="p1_title">بوابة التعليم الذكية (SmartEdu)</h3>
-                        <p data-i18n="p1_desc">منصة تعليمية متكاملة لإدارة الطلاب والدرجات والمهام الدراسية بتصميم عصري.</p>
+                        <p data-i18n="p1_desc">منصة تعليمية متكاملة لإدارة الطلاب والدرجات والمهام الدراسية بتصميم عصري
+                            (Glassmorphism).</p>
+                        <div class="project-tags">
+                            <span>HTML5</span>
+                            <span>CSS3 (Modern)</span>
+                            <span>JavaScript</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Project 2 -->
+
+                <!-- Project 2: EliteCommerce B2B -->
                 <div class="project-card reveal">
                     <div class="project-img">
-                        <img src="./images/projects/merchant_cover.png" alt="Merchant">
+                        <img src="./images/projects/merchant_cover.png" alt="منصة التاجر" class="project-cover">
                         <div class="project-overlay">
-                            <a href="projects/b2b-ecommerce/index.html" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <div class="project-links">
+                                <a href="projects/b2b-ecommerce/index.html" class="project-link" target="_blank"><i
+                                        class="fas fa-external-link-alt"></i> عرض حي</a>
+                                <a href="https://github.com/AbedAraheem" class="project-link" target="_blank"><i
+                                        class="fab fa-github"></i> الكود</a>
+                            </div>
                         </div>
                     </div>
                     <div class="project-info">
                         <h3 data-i18n="p2_title">منصة التاجر (Merchant Platform)</h3>
-                        <p data-i18n="p2_desc">لوحة تحكم تجارية متقدمة (B2B) تتيح للتجار مراقبة المبيعات والمخزون.</p>
+                        <p data-i18n="p2_desc">لوحة تحكم تجارية متقدمة (B2B) تتيح للتجار مراقبة المبيعات والمخزون
+                            والتقارير بدقة عالية.</p>
+                        <div class="project-tags">
+                            <span>Business UI</span>
+                            <span>Analytics Dashboard</span>
+                            <span>Charts JS</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Project 3 -->
+
+                <!-- Project 3: DevTrack System -->
                 <div class="project-card reveal">
                     <div class="project-img">
-                        <img src="./images/projects/devtrack_cover.png" alt="DevTrack">
+                        <img src="./images/projects/devtrack_cover.png" alt="DevTrack System" class="project-cover">
                         <div class="project-overlay">
-                            <a href="projects/devtrack-system/index.html" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <div class="project-links">
+                                <a href="projects/devtrack-system/index.html" class="project-link" target="_blank"><i
+                                        class="fas fa-external-link-alt"></i> عرض حي</a>
+                                <a href="https://github.com/AbedAraheem" class="project-link" target="_blank"><i
+                                        class="fab fa-github"></i> الكود</a>
+                            </div>
                         </div>
                     </div>
                     <div class="project-info">
                         <h3 data-i18n="p3_title">نظام تتبع المهام (DevTrack)</h3>
-                        <p data-i18n="p3_desc">نظام احترافي موجه للمطورين لإدارة المهام وتتبع الأخطاء البرمجية بدقة.</p>
+                        <p data-i18n="p3_desc">نظام احترافي موجه للمطورين لإدارة المهام (Kanban) وتتبع الأخطاء البرمجية
+                            (Bug Tracking).</p>
+                        <div class="project-tags">
+                            <span>Developer Tools</span>
+                            <span>Kanban System</span>
+                            <span>Dark Theme</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Links / Social Section -->
+    <div class="social-links-fixed">
+        <a href="https://github.com/AbedAraheem" target="_blank" rel="noopener noreferrer" title="GitHub"><i
+                class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/abdullrahim" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i
+                class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/#" target="_blank" rel="noopener noreferrer" title="Twitter"><i
+                class="fab fa-twitter"></i></a>
+        <a href="mailto:0595732675geehe@gmail.com?subject=تواصل من الموقع الشخصي" title="إرسال بريد إلكتروني"><i
+                class="fas fa-envelope"></i></a>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="section">
@@ -213,29 +352,59 @@
             <h2 class="section-title" data-i18n="contact_title">تواصل معي</h2>
             <div class="contact-container reveal">
                 <form id="contact-form" action="https://formsubmit.co/0595732675geehe@gmail.com" method="POST">
-                    <div class="form-group"><label data-i18n="contact_name">الاسم</label><input type="text" name="name" data-i18n-placeholder="placeholder_name" placeholder="الاسم الكامل" required></div>
-                    <div class="form-group"><label data-i18n="contact_email">البريد</label><input type="email" name="email" placeholder="example@email.com" required></div>
-                    <div class="form-group"><label data-i18n="contact_msg">الرسالة</label><textarea name="message" rows="5" data-i18n-placeholder="placeholder_msg" placeholder="رسالتك..." required></textarea></div>
-                    <button type="submit" class="btn btn-primary w-full" data-i18n="contact_submit">إرسال الرسالة <i class="fas fa-paper-plane"></i></button>
-                    <div id="form-message" style="display: none; margin-top: 15px; padding: 15px; border-radius: 8px; text-align: center;"></div>
+                    <!-- إعدادات إضافية لخدمة FormSubmit -->
+                    <input type="hidden" name="_subject" value="رسالة جديدة من موقعك الشخصي!">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="box">
+
+                    <div class="form-group">
+                        <label for="name" data-i18n="contact_name">الاسم</label>
+                        <input type="text" id="name" name="name" data-i18n-placeholder="placeholder_name"
+                            placeholder="أدخل اسمك الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="contact_email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-i18n="contact_msg">الرسالة</label>
+                        <textarea id="message" name="message" rows="5" data-i18n-placeholder="placeholder_msg"
+                            placeholder="اكتب رسالتك هنا..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full" data-i18n="contact_submit">إرسال الرسالة <i
+                            class="fas fa-paper-plane"></i></button>
+                    <div id="form-message"
+                        style="display: none; margin-top: 15px; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-family: 'Cairo', sans-serif;">
+                    </div>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer (FULL RESTORED) -->
+    <!-- Footer -->
     <footer>
         <div class="container footer-content">
             <p data-i18n="footer_copy">&copy; 2026 عبد الرحيم خالد الهباش. جميع الحقوق محفوظة.</p>
             <div class="footer-social">
-                <a href="https://github.com/AbedAraheem" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/abdullrahim" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-                <a href="https://x.com/#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-                <a href="mailto:0595732675geehe@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/AbedAraheem" target="_blank" rel="noopener noreferrer" title="GitHub"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/abdullrahim" target="_blank" rel="noopener noreferrer"
+                    title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://x.com/#" target="_blank" rel="noopener noreferrer" title="Twitter"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="mailto:0595732675geehe@gmail.com?subject=تواصل من الموقع الشخصي" title="إرسال بريد إلكتروني"><i
+                        class="fas fa-envelope"></i></a>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="العودة للأعلى">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Custom JS -->
     <script src="script.js"></script>
 </body>
+
 </html>
