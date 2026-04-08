@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية | عبد الرحيم خالد الهباش</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0088cc;
+            --secondary: #1a1a1a;
+            --accent: #00d2ff;
+            --text: #333;
+            --text-light: #666;
+            --bg: #f4f7f9;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding: 40px 0;
+        }
+
+        .cv-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            min-height: 1100px;
+            position: relative;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 40px 30px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--primary);
+            margin: 0 auto 30px;
+            overflow: hidden;
+            background: #222;
+        }
+
+        .profile-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .sidebar-section { margin-bottom: 40px; }
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+        .contact-item i { color: var(--accent); min-width: 20px; text-align: center; }
+
+        .skill-item { margin-bottom: 12px; }
+        .skill-name { font-size: 0.85rem; margin-bottom: 5px; display: block; }
+        .skill-bar { height: 6px; background: #444; border-radius: 3px; overflow: hidden; }
+        .skill-progress { height: 100%; background: linear-gradient(90deg, var(--accent), var(--primary)); border-radius: 3px; }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 50px 40px;
+        }
+
+        header { margin-bottom: 40px; }
+        .name { font-size: 2.8rem; font-weight: 900; color: var(--primary); line-height: 1.2; }
+        .title { font-size: 1.4rem; color: var(--text-light); font-weight: 600; margin-top: 5px; }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-right: 4px solid var(--primary);
+            padding-right: 15px;
+        }
+
+        .summary { font-size: 1rem; color: var(--text-light); text-align: justify; margin-bottom: 30px; }
+
+        .timeline-item { margin-bottom: 25px; position: relative; padding-right: 20px; }
+        .timeline-item::before {
+            content: ''; position: absolute; right: 0; top: 0; width: 2px; height: calc(100% + 15px); background: #eee;
+        }
+        .timeline-item::after {
+            content: ''; position: absolute; right: -4px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--primary);
+        }
+        .timeline-item:last-child::before { display: none; }
+
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+        .item-title { font-weight: 700; font-size: 1.1rem; }
+        .item-date { font-size: 0.85rem; color: var(--primary); font-weight: 600; font-family: 'Outfit'; }
+        .item-org { font-size: 0.95rem; color: var(--text-light); font-weight: 600; margin-bottom: 8px; }
+        .item-desc { font-size: 0.9rem; color: #555; }
+
+        .project-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .project-item { padding: 15px; border: 1px solid #eee; border-radius: 10px; }
+        .project-item h4 { color: var(--primary); margin-bottom: 5px; font-size: 1rem; }
+
+        /* Print Controls */
+        .print-btn {
+            position: fixed; top: 20px; right: 20px; padding: 12px 25px; background: var(--primary); color: white;
+            border-radius: 50px; cursor: pointer; border: none; font-weight: 700; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .print-btn { display: none; }
+            .cv-page { box-shadow: none; margin: 0; width: 100%; max-width: none; }
+            @page { margin: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .cv-page { flex-direction: column; }
+            .sidebar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> حفظ كـ PDF</button>
+
+    <div class="cv-page">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-img">
+                <img src="images/me.jpg" alt="عبد الرحيم الهباش" onerror="this.src='https://ui-avatars.com/api/?name=عبد+الرحيم&background=0088cc&color=fff'">
+            </div>
+
+            <section class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-user-tag"></i> تواصل معي</h3>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>0595732675</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>+970595732675</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>0595732675geehe@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>غزة، فلسطين</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>linkedin.com/in/abdullrahim</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <span>github.com/AbedAraheem</span>
+                </div>
+            </section>
+
+            <section class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-tools"></i> المهارات التقنية</h3>
+                <div class="skill-item">
+                    <span class="skill-name">JavaScript / TypeScript</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">React / Next.js</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Python / Node.js</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Database (SQL / NoSQL)</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">REST APIs & Integrations</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">UI/UX & Web Design</span>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                </div>
+            </section>
+
+            <section class="sidebar-section">
+                <h3 class="sidebar-title"><i class="fas fa-language"></i> اللغات</h3>
+                <p>العربية: اللغة الأم</p>
+                <p>الإنجليزية: بطلاقة تقنية</p>
+            </section>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1 class="name">عبد الرحيم خالد علي الهباش</h1>
+                <p class="title">مهندس برمجيات | مطور تطبيقات ويب</p>
+            </header>
+
+            <section>
+                <h2 class="section-title"><i class="fas fa-bullseye"></i> النبذة المهنية</h2>
+                <p class="summary">
+                    مهندس برمجيات طموح وشغوف بتطوير الحلول الرقمية الحديثة، خريج تخصص نظم معلومات إدارية من جامعة الأقصى (2026). أمتلك خبرة عملية تمتد لثلاث سنوات في العمل الحر، حيث تخصصت في بناء واجهات مستخدم احترافية وأنظمة ويب متكاملة تلبي معايير الجودة العالمية. أتميز بقدرتي على التعامل مع التحديات التقنية وحل المشكلات المعقدة لتقديم منتجات برمجية تجمع بين الكفاءة العالية والتصميم العصري.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> التعليم</h2>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <span class="item-title">بكالوريوس نظم معلومات إدارية</span>
+                        <span class="item-date">2022 - 2026</span>
+                    </div>
+                    <div class="item-org">جامعة الأقصى - غزة</div>
+                    <p class="item-desc">دراسة متعمقة في تحليل النظم، قواعد البيانات، وإدارة المشاريع التقنية والبرمجية.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><i class="fas fa-briefcase"></i> الخبرة العملية</h2>
+                <div class="timeline-item">
+                    <div class="item-header">
+                        <span class="item-title">مطور ويب مستقل (Freelancer)</span>
+                        <span class="item-date">2023 - الحاضر</span>
+                    </div>
+                    <div class="item-org">منصات العمل الحر (مستقل / خمسات / Upwork)</div>
+                    <p class="item-desc">
+                        تصميم وتطوير أكثر من 20 مشروعاً لعملاء متنوعين، شملت بناء متاجر إلكترونية، لوحات تحكم إحصائية، ومواقع تعريفية احترافية باستخدام أحدث التقنيات.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> أبرز المشاريع</h2>
+                <div class="project-list">
+                    <div class="project-item">
+                        <h4>بوابة التعليم الذكية (SmartEdu)</h4>
+                        <p class="item-desc">منصة تعليمية متكاملة لإدارة الطلاب والمهام بتصميم Glassmorphism حديث.</p>
+                    </div>
+                    <div class="project-item">
+                        <h4>منصة التاجر B2B</h4>
+                        <p class="item-desc">لوحة تحكم تجارية متقدمة لتتبع المبيعات والمخزون والتقارير المالية بدقة.</p>
+                    </div>
+                    <div class="project-item">
+                        <h4>نظام DevTrack</h4>
+                        <p class="item-desc">نظام لإدارة مهام المطورين (Kanban) وتتبع الأخطاء البرمجية بكفاءة.</p>
+                    </div>
+                    <div class="project-item">
+                        <h4>الموقع الشخصي النخبوي</h4>
+                        <p class="item-desc">بورتفوليو احترافي يضم كافة المشاريع مع دعم كامل للغتين العربية والإنجليزية.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>
