@@ -143,8 +143,10 @@
             border-radius: 50px; cursor: pointer; border: none; font-weight: 700; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        a { text-decoration: none; color: inherit; }
-        .project-item a:hover { color: var(--primary); }
+        a { text-decoration: none; color: #0066cc; transition: all 0.3s ease; }
+        a:hover { color: var(--primary); text-decoration: underline; }
+        .project-item a h4 { color: #0066cc; }
+        .project-item a:hover h4 { color: var(--primary); }
 
         @media print {
             body { padding: 0; background: white; }
@@ -161,12 +163,17 @@
                 border-bottom: 2px solid #000 !important; 
             }
             .contact-item { 
-                color: #000 !important; 
+                color: #0066cc !important; 
                 font-weight: 600;
             }
             .contact-item i { 
-                color: #000 !important; 
+                color: #0066cc !important; 
             }
+            .sidebar .sidebar-section div.contact-item { color: #000 !important; }
+            .sidebar .sidebar-section div.contact-item i { color: #000 !important; }
+            
+            .project-item a h4 { color: #0066cc !important; }
+            .project-item a i { color: #0066cc !important; }
             .skill-bar { 
                 background: #eee !important; 
                 border: 1px solid #ddd;
