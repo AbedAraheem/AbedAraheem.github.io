@@ -700,6 +700,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     dynamicView.style.transition = 'opacity 0.2s ease-in-out';
 
+    // Utility to refresh the active view (Table or Chart)
+    function refreshActiveView() {
+        const activeLink = document.querySelector('.nav-link.active');
+        if (!activeLink) return;
+        const key = activeLink.getAttribute('data-content');
+        
+        if (key === 'dashboard') {
+            dynamicView.innerHTML = renderDashboard();
+            updateDashboardDOM();
+            initDashboardChart();
+        } else if (key === 'inventory') {
+            dynamicView.innerHTML = renderInventoryView();
+        } else if (key === 'orders') {
+            dynamicView.innerHTML = renderOrdersView();
+        } else if (key === 'customers') {
+            dynamicView.innerHTML = renderCustomersView();
+        } else if (key === 'automation') {
+            // No need to full render, just update logs manually if needed
+        }
+    }
+
     // --- BPA Automation Simulation & System Logic ---
     let lowStockThreshold = 10;
     
@@ -715,16 +736,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.simulateWhatsAppSync = () => {
-        const btn = event.target;
-        const originalText = btn.innerText;
+        const btn = event.currentTarget; // use currentTarget for the button
+        const originalText = btn.innerHTML;
         btn.disabled = true; btn.innerText = 'جارٍ المزامنة...';
         showToast('بدأت مزامنة طلبات واتساب... 🔄');
 
         setTimeout(() => {
             const newOrder = {
                 id: `#ORD-${Math.floor(1000 + Math.random() * 9000)}`,
-                client: 'عميل واتساب (API)',
-                product: 'أجهزة تقنية متنوعة',
+                client: 'عميل أتمتة (WhatsApp API)',
+                product: 'أجهزة ذكية متفرقة',
                 total: `$${(Math.random() * 3000 + 500).toFixed(2)}`,
                 status: 'pending',
                 statusText: 'معلق',
@@ -734,7 +755,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addAutomationLog('مزامنة واتساب API', `تم اكتشاف طلب جديد ${newOrder.id}`);
             
             showToast(`تمت المزامنة! تم اكتشاف طلب جديد: ${newOrder.id} ✅`);
-            btn.disabled = false; btn.innerText = originalText;
+            btn.disabled = false; btn.innerHTML = originalText;
             
             if (b2bBellBadge) {
                 b2bUnread++;
@@ -742,9 +763,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 b2bBellBadge.textContent = b2bUnread;
             }
             
-            // If on dashboard, stats will update on next visit. If we want live chart update:
-            const activeKey = document.querySelector('.nav-link.active').getAttribute('data-content');
-            if (activeKey === 'dashboard') dynamicView.innerHTML = renderDashboard();
+            // Live Refresh for Dashboard logic
+            refreshActiveView();
         }, 1500);
     };
 
@@ -756,21 +776,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h2>تعديل قواعد الأتمتة الذكية</h2>
                 <button class="close-btn" onclick="document.getElementById('modal-overlay').classList.remove('active')">&times;</button>
             </div>
+            <div style="margin-bottom:20px; padding:15px; background:rgba(16,185,129,0.05); border-radius:10px;">
+                <small style="color:var(--text-light)">القاعدة المفعلة حالياً:</small>
+                <div style="font-weight:700">تنبيه ذكي عند انخفاض المخزون تحت ${lowStockThreshold} قطعة.</div>
+            </div>
             <div class="input-group">
-                <label>تنبيه انخفاض المخزون (الحد الأدنى)</label>
+                <label>تحديد حد المخزون الجديد</label>
                 <input type="number" id="rule-threshold" value="${lowStockThreshold}" min="1">
             </div>
             <div class="input-group">
-                <label>رسالة التنبيه الآلية</label>
-                <select>
-                    <option>إرسال إشعار للنظام فقط</option>
-                    <option>إرسال رسالة واتساب للمسؤول</option>
-                    <option>إرسال بريد إلكتروني</option>
+                <label>نوع التنبيه</label>
+                <select id="rule-type">
+                    <option value="sys">إشعار نظام فقط</option>
+                    <option value="wa" selected>رسالة واتساب آلية</option>
+                    <option value="email">بريد إلكتروني مفصل</option>
                 </select>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" onclick="document.getElementById('modal-overlay').classList.remove('active')">إلغاء</button>
-                <button class="btn btn-primary" onclick="saveAutomationRules()">حفظ القواعد</button>
+                <button class="btn btn-primary" onclick="saveAutomationRules()">حفظ التعديلات</button>
             </div>
         `;
         modal.classList.add('active');
@@ -778,9 +802,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.saveAutomationRules = () => {
         lowStockThreshold = parseInt(document.getElementById('rule-threshold').value);
-        showToast('تم تحديث قواعد الأتمتة بنجاح! ⚙️');
-        addAutomationLog('تحديث القواعد', `تغيير حد المخزون لـ ${lowStockThreshold}`);
+        const type = document.getElementById('rule-type').selectedOptions[0].text;
+        showToast(`تم تحديث القاعدة: تنبيه عبر ${type} عند الحد ${lowStockThreshold} ✅`);
+        addAutomationLog('تحديث القواعد', `تغيير حد المخزون لـ ${lowStockThreshold} (تنبيه: ${type})`);
         document.getElementById('modal-overlay').classList.remove('active');
+        
+        // Refresh subtitle descriptive text if we had any
     };
 
     window.openBillingModal = () => {
@@ -791,44 +818,82 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h2>إدارة الفواتير والاشتراك التقني</h2>
                 <button class="close-btn" onclick="document.getElementById('modal-overlay').classList.remove('active')">&times;</button>
             </div>
-            <div style="background:#f1f5f9; padding:15px; border-radius:10px; margin-bottom:20px">
-                <small style="color:var(--text-light)">الخطة الحالية</small>
-                <h3 style="color:var(--primary)">Enterprise BPA Plan</h3>
-                <div style="display:flex; justify-content:space-between; margin-top:10px">
-                    <b>$50.00 / شهر</b>
-                    <span class="status-badge delivered">نشط</span>
+            <div style="background:var(--gradient); color:white; padding:20px; border-radius:15px; margin-bottom:20px; box-shadow:0 10px 20px rgba(0,0,0,0.1)">
+                <div style="display:flex; justify-content:space-between; align-items:center">
+                    <div>
+                        <small style="opacity:0.8">حالة الاشتراك</small>
+                        <h3 style="margin-top:5px">Enterprise Plan</h3>
+                    </div>
+                    <span style="background:rgba(255,255,255,0.2); padding:5px 12px; border-radius:50px; font-size:0.75rem;">نشط</span>
+                </div>
+                <div style="margin-top:20px; display:flex; justify-content:space-between; border-top:1px solid rgba(255,255,255,0.2); padding-top:10px">
+                    <span>الرسوم الشهرية:</span>
+                    <b>$50.00</b>
                 </div>
             </div>
-            <h4>سجل الدفع الأخبر</h4>
-            <div style="max-height:150px; overflow-y:auto; margin-top:10px">
-                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee">
-                    <span>فاتورة أبريل 2026</span>
-                    <b style="color:var(--primary)">تم الدفع</b>
+            <h4 style="margin-bottom:10px">سجل المعاملات المالية</h4>
+            <div style="max-height:180px; overflow-y:auto;">
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:12px; border-bottom:1px solid #eee">
+                    <div><b>فاتورة أبريل 2026</b><br><small style="color:var(--text-light)">2026-04-01</small></div>
+                    <span class="status-badge delivered">تم الدفع</span>
                 </div>
-                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee">
-                    <span>فاتورة مارس 2026</span>
-                    <b style="color:var(--primary)">تم الدفع</b>
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:12px; border-bottom:1px solid #eee">
+                    <div><b>فاتورة مارس 2026</b><br><small style="color:var(--text-light)">2026-03-01</small></div>
+                    <span class="status-badge delivered">تم الدفع</span>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:12px; border-bottom:1px solid #eee">
+                    <div><b>فاتورة فبراير 2026</b><br><small style="color:var(--text-light)">2026-02-01</small></div>
+                    <span class="status-badge delivered">تم الدفع</span>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary w-full">تحميل تقرير الضريبة (VAT)</button>
+            <div class="modal-footer" style="margin-top:15px">
+                <button class="btn btn-outline" style="width:100%"><i class="fas fa-file-pdf"></i> تحميل كشف حساب ضريبي</button>
             </div>
         `;
         modal.classList.add('active');
     };
 
     window.runAllAutomationTasks = () => {
-        showToast('جارٍ فحص جميع أنظمة الأتمتة... 🛡️');
+        showToast('بدء فحص النظام الشامل... 🛡️');
+        addAutomationLog('إطلاق مهام الأتمتة', 'بدء الفحص الشامل لجميع المكونات برمجياً');
+        
+        // Modal for Report Results
+        const modal = document.getElementById('modal-overlay');
+        const card = modal.querySelector('.modal-card');
+        
         setTimeout(() => {
-            const affectedItems = inventoryList.filter(item => item.qty < lowStockThreshold);
-            if (affectedItems.length > 0) {
-                showToast(`تنبيه: يوجد ${affectedItems.length} منتجات تحت حد الأمان!`);
-                addAutomationLog('فحص المخزون الآلي', `تنبيه انخفاض مخزون لـ ${affectedItems.length} منتجات`, 'pending');
-            } else {
-                showToast('جميع الأنظمة تعمل بكفاءة 100% ✅');
-                addAutomationLog('فحص شامل للأنظمة', 'لم يتم اكتشاف أي مشاكل تقنية');
-            }
-        }, 1000);
+            const lowItems = inventoryList.filter(i => i.qty < lowStockThreshold);
+            const totalOrdersToday = ordersList.filter(o => o.dateObj.getDate() === new Date().getDate()).length;
+            
+            card.innerHTML = `
+                <div class="modal-header">
+                    <h2>تقرير فحص النظام (Automation Audit)</h2>
+                    <button class="close-btn" onclick="document.getElementById('modal-overlay').classList.remove('active')">&times;</button>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:20px">
+                    <div style="padding:15px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; text-align:center">
+                        <small>إجمالي مبيعات اليوم</small>
+                        <h4 style="color:var(--primary); font-size:1.2rem">${totalOrdersToday} طلب</h4>
+                    </div>
+                    <div style="padding:15px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; text-align:center">
+                        <small>حالة الربط API</small>
+                        <h4 style="color:var(--primary); font-size:1.2rem">مستقر 100%</h4>
+                    </div>
+                </div>
+                <h4>تحليل المخزون والقواعد:</h4>
+                <div style="margin-top:10px; background:${lowItems.length > 0 ? 'rgba(239,68,68,0.05)' : 'rgba(16,185,129,0.05)'}; padding:15px; border-radius:10px; border:1px solid ${lowItems.length > 0 ? '#fecaca' : '#bbf7d0'}">
+                    ${lowItems.length > 0 
+                        ? `<b style="color:#ef4444"><i class="fas fa-exclamation-triangle"></i> يوجد ${lowItems.length} منتجات تحت حد الأمان!</b><ul>${lowItems.map(i => `<li>${i.name} (${i.qty} وحدة)</li>`).join('')}</ul>` 
+                        : `<b style="color:var(--primary)"><i class="fas fa-check-circle"></i> جميع المنتجات فوق حد الأمان (${lowStockThreshold} قطع).</b>`
+                    }
+                </div>
+                <div class="modal-footer" style="margin-top:20px">
+                    <button class="btn btn-primary" style="width:100%" onclick="document.getElementById('modal-overlay').classList.remove('active')">إغلاق التقرير</button>
+                </div>
+            `;
+            modal.classList.add('active');
+            addAutomationLog('نهاية الفحص', `اكتشاف ${lowItems.length} تنبيهات مخزون`);
+        }, 1500);
     };
     
     dynamicView.style.transition = 'opacity 0.2s ease-in-out';
