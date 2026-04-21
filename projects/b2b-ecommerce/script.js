@@ -172,13 +172,65 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button class="btn btn-primary" onclick="handleReportEN()" style="width:100%; background:#0ea5e9">Download</button>
                     </div>
                 </div>
-                <!-- Template for HTML2PDF -->
-                <div id="report-template" style="display:none; padding:40px; font-family:'Cairo', sans-serif; direction: rtl; background:white;">
-                    <h1 style="text-align:center; color:#10b981">منصة التاجر - تقرير إحصائي</h1>
-                    <p style="text-align:center">التاريخ: ${new Date().toLocaleDateString('ar-EG')}</p><hr>
-                    <p><strong>المبرمج المسؤول:</strong> ${userNameAR}</p>
-                    <p>1. المبيعات: مرتفعة ($124,560.80)</p>
-                    <p>2. حالة المستودع: مستقرة</p>
+            `
+        },
+        automation: {
+            title: 'مركز الأتمتة الذكي (BPA Hub)',
+            subtitle: 'إدارة تدفقات العمل الآلية وربط الأنظمة الخارجية بالمخزون.',
+            btn: '<i class="fas fa-bolt"></i> تشغيل جميع المهام',
+            content: `
+                <div class="details-grid">
+                    <div class="paper automation-card">
+                        <div class="card-header-flex">
+                            <div class="icon-circle" style="background:rgba(37,211,102,0.1); color:#25d366"><i class="fab fa-whatsapp"></i></div>
+                            <h4>مزامنة طلبات واتساب</h4>
+                            <span class="status-badge delivered">متصل</span>
+                        </div>
+                        <p style="font-size:0.85rem; color:var(--text-light); margin:15px 0;">يقوم النظام تلقائياً بسحب الطلبات من محادثات واتساب وتحويلها إلى فواتير جاهزة.</p>
+                        <div class="stat-mini">آخر مزامنة: منذ 5 دقائق</div>
+                        <button class="btn btn-outline w-full" onclick="simulateWhatsAppSync()" style="margin-top:10px">مزامنة يدوية</button>
+                    </div>
+
+                    <div class="paper automation-card">
+                        <div class="card-header-flex">
+                            <div class="icon-circle" style="background:rgba(14,165,233,0.1); color:#0ea5e9"><i class="fas fa-robot"></i></div>
+                            <h4>محرك القواعد الذكي</h4>
+                            <div class="toggle-switch active"></div>
+                        </div>
+                        <p style="font-size:0.85rem; color:var(--text-light); margin:15px 0;">تنبيهات تلقائية عند انخفاض المخزون عن 10 وحدات أو وصول طلب VIP.</p>
+                        <div class="stat-mini">القواعد النشطة: 4 قواعد</div>
+                        <button class="btn btn-outline w-full" style="margin-top:10px">تعديل القواعد</button>
+                    </div>
+
+                    <div class="paper automation-card accent-card" style="border: 2px solid var(--primary);">
+                        <div class="card-header-flex">
+                            <div class="icon-circle" style="background:var(--primary); color:white"><i class="fas fa-gem"></i></div>
+                            <h4>حالة الاشتراك التقني</h4>
+                            <span class="status-badge vip">نشط - خطة برو</span>
+                        </div>
+                        <div style="margin:15px 0;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:5px">
+                                <span style="font-size:0.85rem;">موعد التجديد القادم:</span>
+                                <span style="font-weight:700">22 مايو 2026</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between;">
+                                <span style="font-size:0.85rem;">رسوم الصيانة الدورية:</span>
+                                <span style="font-weight:700; color:var(--primary)">$50.00 / شهر</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-full">إدارة الفواتير</button>
+                    </div>
+                </div>
+                
+                <div class="paper" style="margin-top:20px">
+                    <div class="card-title">سجل العمليات الآلية الأخيرة</div>
+                    <table class="orders-table">
+                        <thead><tr><th>الوقت</th><th>العملية</th><th>النتيجة</th><th>الحالة</th></tr></thead>
+                        <tbody id="automation-logs">
+                            <tr><td>14:20</td><td>مزامنة مخزن (MacBook)</td><td>تحديث الكمية لـ 45</td><td><span class="status-badge delivered">ناجح</span></td></tr>
+                            <tr><td>13:45</td><td>تنبيه طلب VIP</td><td>إرسال إشعار للمدير</td><td><span class="status-badge delivered">ناجح</span></td></tr>
+                        </tbody>
+                    </table>
                 </div>
             `
         }
@@ -647,4 +699,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     dynamicView.style.transition = 'opacity 0.2s ease-in-out';
+
+    // --- BPA Automation Simulation ---
+    window.simulateWhatsAppSync = () => {
+        showToast('بدأت مزامنة طلبات واتساب... 🔄');
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.disabled = true;
+        btn.innerText = 'جارٍ المزامنة...';
+
+        setTimeout(() => {
+            const newOrder = {
+                id: `#ORD-${Math.floor(1000 + Math.random() * 9000)}`,
+                client: 'عميل واتساب (جديد)',
+                product: 'طلب آلي عبر النظام',
+                total: `$${(Math.random() * 5000).toFixed(2)}`,
+                status: 'pending',
+                statusText: 'معلق',
+                dateObj: new Date()
+            };
+            ordersList.unshift(newOrder);
+            
+            // Add to logs
+            const logsTbody = document.getElementById('automation-logs');
+            if (logsTbody) {
+                const row = document.createElement('tr');
+                const now = new Date();
+                row.innerHTML = `<td>${now.getHours()}:${now.getMinutes()}</td><td>مزامنة واتساب API</td><td>إضافة طلب ${newOrder.id}</td><td><span class="status-badge delivered">ناجح</span></td>`;
+                logsTbody.prepend(row);
+            }
+            
+            showToast(`تم اكتشاف ومزامنة طلب جديد: ${newOrder.id} ✅`);
+            btn.disabled = false;
+            btn.innerText = originalText;
+            
+            // Notification also
+            if (b2bBellBadge) {
+                b2bUnread++;
+                b2bBellBadge.style.display = 'flex';
+                b2bBellBadge.textContent = b2bUnread;
+            }
+        }, 2000);
+    };
 });
