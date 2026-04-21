@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         automation: {
             title: 'مركز الأتمتة الذكي (BPA Hub)',
             subtitle: 'إدارة تدفقات العمل الآلية وربط الأنظمة الخارجية بالمخزون.',
-            btn: '<i class="fas fa-bolt"></i> تشغيل جميع المهام',
+            btn: '<i class="fas fa-bolt"></i> <span onclick="runAllAutomationTasks()">تشغيل جميع المهام</span>',
             content: `
                 <div class="details-grid">
                     <div class="paper automation-card">
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <p style="font-size:0.85rem; color:var(--text-light); margin:15px 0;">تنبيهات تلقائية عند انخفاض المخزون عن 10 وحدات أو وصول طلب VIP.</p>
                         <div class="stat-mini">القواعد النشطة: 4 قواعد</div>
-                        <button class="btn btn-outline w-full" style="margin-top:10px">تعديل القواعد</button>
+                        <button class="btn btn-outline w-full" onclick="openAutomationRulesModal()" style="margin-top:10px">تعديل القواعد</button>
                     </div>
 
                     <div class="paper automation-card accent-card" style="border: 2px solid var(--primary);">
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span style="font-weight:700; color:var(--primary)">$50.00 / شهر</span>
                             </div>
                         </div>
-                        <button class="btn btn-primary w-full">إدارة الفواتير</button>
+                        <button class="btn btn-primary w-full" onclick="openBillingModal()">إدارة الفواتير</button>
                     </div>
                 </div>
                 
@@ -700,45 +700,136 @@ document.addEventListener('DOMContentLoaded', () => {
 
     dynamicView.style.transition = 'opacity 0.2s ease-in-out';
 
-    // --- BPA Automation Simulation ---
+    // --- BPA Automation Simulation & System Logic ---
+    let lowStockThreshold = 10;
+    
+    // Utility to add to Automation Logs
+    function addAutomationLog(operation, result, status = 'delivered') {
+        const logsTbody = document.getElementById('automation-logs');
+        if (!logsTbody) return;
+        const now = new Date();
+        const timeStr = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`;
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${timeStr}</td><td>${operation}</td><td>${result}</td><td><span class="status-badge ${status}">${status === 'delivered' ? 'ناجح' : 'فشل'}</span></td>`;
+        logsTbody.prepend(row);
+    }
+
     window.simulateWhatsAppSync = () => {
-        showToast('بدأت مزامنة طلبات واتساب... 🔄');
         const btn = event.target;
         const originalText = btn.innerText;
-        btn.disabled = true;
-        btn.innerText = 'جارٍ المزامنة...';
+        btn.disabled = true; btn.innerText = 'جارٍ المزامنة...';
+        showToast('بدأت مزامنة طلبات واتساب... 🔄');
 
         setTimeout(() => {
             const newOrder = {
                 id: `#ORD-${Math.floor(1000 + Math.random() * 9000)}`,
-                client: 'عميل واتساب (جديد)',
-                product: 'طلب آلي عبر النظام',
-                total: `$${(Math.random() * 5000).toFixed(2)}`,
+                client: 'عميل واتساب (API)',
+                product: 'أجهزة تقنية متنوعة',
+                total: `$${(Math.random() * 3000 + 500).toFixed(2)}`,
                 status: 'pending',
                 statusText: 'معلق',
                 dateObj: new Date()
             };
             ordersList.unshift(newOrder);
+            addAutomationLog('مزامنة واتساب API', `تم اكتشاف طلب جديد ${newOrder.id}`);
             
-            // Add to logs
-            const logsTbody = document.getElementById('automation-logs');
-            if (logsTbody) {
-                const row = document.createElement('tr');
-                const now = new Date();
-                row.innerHTML = `<td>${now.getHours()}:${now.getMinutes()}</td><td>مزامنة واتساب API</td><td>إضافة طلب ${newOrder.id}</td><td><span class="status-badge delivered">ناجح</span></td>`;
-                logsTbody.prepend(row);
-            }
+            showToast(`تمت المزامنة! تم اكتشاف طلب جديد: ${newOrder.id} ✅`);
+            btn.disabled = false; btn.innerText = originalText;
             
-            showToast(`تم اكتشاف ومزامنة طلب جديد: ${newOrder.id} ✅`);
-            btn.disabled = false;
-            btn.innerText = originalText;
-            
-            // Notification also
             if (b2bBellBadge) {
                 b2bUnread++;
                 b2bBellBadge.style.display = 'flex';
                 b2bBellBadge.textContent = b2bUnread;
             }
-        }, 2000);
+            
+            // If on dashboard, stats will update on next visit. If we want live chart update:
+            const activeKey = document.querySelector('.nav-link.active').getAttribute('data-content');
+            if (activeKey === 'dashboard') dynamicView.innerHTML = renderDashboard();
+        }, 1500);
     };
+
+    window.openAutomationRulesModal = () => {
+        const modal = document.getElementById('modal-overlay');
+        const card = modal.querySelector('.modal-card');
+        card.innerHTML = `
+            <div class="modal-header">
+                <h2>تعديل قواعد الأتمتة الذكية</h2>
+                <button class="close-btn" onclick="document.getElementById('modal-overlay').classList.remove('active')">&times;</button>
+            </div>
+            <div class="input-group">
+                <label>تنبيه انخفاض المخزون (الحد الأدنى)</label>
+                <input type="number" id="rule-threshold" value="${lowStockThreshold}" min="1">
+            </div>
+            <div class="input-group">
+                <label>رسالة التنبيه الآلية</label>
+                <select>
+                    <option>إرسال إشعار للنظام فقط</option>
+                    <option>إرسال رسالة واتساب للمسؤول</option>
+                    <option>إرسال بريد إلكتروني</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="document.getElementById('modal-overlay').classList.remove('active')">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveAutomationRules()">حفظ القواعد</button>
+            </div>
+        `;
+        modal.classList.add('active');
+    };
+
+    window.saveAutomationRules = () => {
+        lowStockThreshold = parseInt(document.getElementById('rule-threshold').value);
+        showToast('تم تحديث قواعد الأتمتة بنجاح! ⚙️');
+        addAutomationLog('تحديث القواعد', `تغيير حد المخزون لـ ${lowStockThreshold}`);
+        document.getElementById('modal-overlay').classList.remove('active');
+    };
+
+    window.openBillingModal = () => {
+        const modal = document.getElementById('modal-overlay');
+        const card = modal.querySelector('.modal-card');
+        card.innerHTML = `
+            <div class="modal-header">
+                <h2>إدارة الفواتير والاشتراك التقني</h2>
+                <button class="close-btn" onclick="document.getElementById('modal-overlay').classList.remove('active')">&times;</button>
+            </div>
+            <div style="background:#f1f5f9; padding:15px; border-radius:10px; margin-bottom:20px">
+                <small style="color:var(--text-light)">الخطة الحالية</small>
+                <h3 style="color:var(--primary)">Enterprise BPA Plan</h3>
+                <div style="display:flex; justify-content:space-between; margin-top:10px">
+                    <b>$50.00 / شهر</b>
+                    <span class="status-badge delivered">نشط</span>
+                </div>
+            </div>
+            <h4>سجل الدفع الأخبر</h4>
+            <div style="max-height:150px; overflow-y:auto; margin-top:10px">
+                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee">
+                    <span>فاتورة أبريل 2026</span>
+                    <b style="color:var(--primary)">تم الدفع</b>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee">
+                    <span>فاتورة مارس 2026</span>
+                    <b style="color:var(--primary)">تم الدفع</b>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary w-full">تحميل تقرير الضريبة (VAT)</button>
+            </div>
+        `;
+        modal.classList.add('active');
+    };
+
+    window.runAllAutomationTasks = () => {
+        showToast('جارٍ فحص جميع أنظمة الأتمتة... 🛡️');
+        setTimeout(() => {
+            const affectedItems = inventoryList.filter(item => item.qty < lowStockThreshold);
+            if (affectedItems.length > 0) {
+                showToast(`تنبيه: يوجد ${affectedItems.length} منتجات تحت حد الأمان!`);
+                addAutomationLog('فحص المخزون الآلي', `تنبيه انخفاض مخزون لـ ${affectedItems.length} منتجات`, 'pending');
+            } else {
+                showToast('جميع الأنظمة تعمل بكفاءة 100% ✅');
+                addAutomationLog('فحص شامل للأنظمة', 'لم يتم اكتشاف أي مشاكل تقنية');
+            }
+        }, 1000);
+    };
+    
+    dynamicView.style.transition = 'opacity 0.2s ease-in-out';
 });
